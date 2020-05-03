@@ -58,10 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\Cliente.cs" />
+    <Compile Include="models\Cobro.cs" />
     <Compile Include="models\Conexion.cs" />
+    <Compile Include="models\Prestamo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="models\Usuario.cs" />
+    <Compile Include="views\dialogs\CrearNuevoCobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\CrearNuevoCobro.Designer.cs">
+      <DependentUpon>CrearNuevoCobro.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +92,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="views\dialogs\CrearNuevoCobro.resx">
+      <DependentUpon>CrearNuevoCobro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

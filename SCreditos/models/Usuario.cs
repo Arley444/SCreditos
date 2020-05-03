@@ -66,6 +66,7 @@ namespace SCreditos.models
             return this.contrasenna;
         }
 
+
         public String validarUsuario()
         {
             String mensaje = null; 

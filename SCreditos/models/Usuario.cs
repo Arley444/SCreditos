@@ -73,6 +73,7 @@ namespace SCreditos.models
 
             try
             {
+                Conexion.desconectar();
                 string script = "SELECT * FROM USUARIOS WHERE USUARIO= '" + this.usuario + "'";
                 NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
                 Conexion.conectar();

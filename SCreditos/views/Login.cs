@@ -10,6 +10,9 @@ namespace SCreditos.views
         public Login()
         {
             InitializeComponent();
+
+            lblAvisoUsuario.Visible = false;
+            lblAvisoPassword.Visible = false;
         }
 
 
@@ -43,16 +46,37 @@ namespace SCreditos.views
 
                 if (usuario.validarUsuario() == null)
                 {
+                    lblAvisoUsuario.Visible = false;
+                    lblAvisoPassword.Visible = false;
                     new Principal(usuario).Show();
                     this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show(usuario.validarUsuario(), "Error");
+                    if (usuario.validarUsuario().Equals("La contraseña no es valida."))
+                    {
+                        lblAvisoPassword.Visible = true;
+                    }
+                    else
+                    {
+                        lblAvisoPassword.Visible = false;
+                    }
+
+                    if (usuario.validarUsuario().Equals("El usuario no es valido."))
+                    {
+                        lblAvisoUsuario.Visible = true;
+                    }
+                    else
+                    {
+                        lblAvisoUsuario.Visible = false;
+                    }
                 }            
             }      
         }
 
-
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

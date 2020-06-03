@@ -34,6 +34,8 @@
             this.lblCapital = new System.Windows.Forms.Label();
             this.txtCapital = new System.Windows.Forms.TextBox();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dpkFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -47,7 +49,7 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(38, 109);
+            this.btnCrear.Location = new System.Drawing.Point(38, 144);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 1;
@@ -80,7 +82,7 @@
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(122, 109);
+            this.btnCerrar.Location = new System.Drawing.Point(122, 144);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
             this.btnCerrar.TabIndex = 5;
@@ -88,11 +90,33 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 110);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Fecha Inicio";
+            // 
+            // dpkFechaInicio
+            // 
+            this.dpkFechaInicio.CustomFormat = "dd/MM/yyyy";
+            this.dpkFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dpkFechaInicio.Location = new System.Drawing.Point(105, 104);
+            this.dpkFechaInicio.MaxDate = new System.DateTime(2200, 12, 31, 0, 0, 0, 0);
+            this.dpkFechaInicio.MinDate = new System.DateTime(2019, 1, 1, 0, 0, 0, 0);
+            this.dpkFechaInicio.Name = "dpkFechaInicio";
+            this.dpkFechaInicio.Size = new System.Drawing.Size(96, 20);
+            this.dpkFechaInicio.TabIndex = 7;
+            // 
             // CrearNuevoCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 157);
+            this.ClientSize = new System.Drawing.Size(231, 206);
+            this.Controls.Add(this.dpkFechaInicio);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.txtCapital);
             this.Controls.Add(this.lblCapital);
@@ -115,5 +139,7 @@
         private System.Windows.Forms.Label lblCapital;
         private System.Windows.Forms.TextBox txtCapital;
         private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dpkFechaInicio;
     }
 }

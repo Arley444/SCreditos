@@ -55,6 +55,7 @@ namespace SCreditos.views.dialogs
                 Cobro cobro = new Cobro();
                 cobro.setNombre(txtNombre.Text.Trim().ToUpper());
                 cobro.setCapital(Int32.Parse(txtCapital.Text.Trim()));
+                cobro.setFechaInicio(dpkFechaInicio.Value.ToShortDateString());
 
                 if (cobro.validarCobro() == null)
                 {

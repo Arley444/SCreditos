@@ -10,7 +10,9 @@ namespace SCreditos.models
 {
     class Cliente
     {
-        private int id, ruta, idPrestamo;
+        private String CLIENTE_PRIMERO = "PRIMERO";
+
+        private int id, ruta;
 
         private string cedula = null;
 
@@ -27,7 +29,6 @@ namespace SCreditos.models
         {
             this.id = id;
             this.ruta = ruta;
-            this.idPrestamo = idPrestamo;
             this.cedula = cedula;
             this.cobro = cobro;
             this.nombre = nombre;
@@ -35,18 +36,18 @@ namespace SCreditos.models
             this.telefono = telefono;
             this.calificacion = calificacion;
         }
-        
+
         public static List<Cliente> listarClientes(String pCobro)
         {
             List<Cliente> lista = null;
 
             try
             {
+                Conexion.desconectar();
                 string script = "SELECT * FROM CLIENTES WHERE COBRO='" + pCobro + "' ORDER BY RUTA ASC;";
                 NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
                 Conexion.conectar();
                 NpgsqlDataReader consulta = command.ExecuteReader();
-
                 if (consulta.HasRows)
                 {
                     lista = new List<Cliente>();
@@ -64,16 +65,17 @@ namespace SCreditos.models
 
             return lista;
         }
-        
+
         public string buscarCliente()
         {
             string mensaje = null;
 
             try
             {
-                if (this.getCedula() == null && this.getCobro() == null)
+                Conexion.desconectar();
+                if (this.getCedula() != null && this.getCobro() != null)
                 {
-                    string script = "SELECT* FROM CLIENTES WHERE CEDULA LIKE '" + this.getCedula() + "%' AND COBRO = '" + this.getCobro() + "'";
+                    string script = "SELECT * FROM CLIENTES WHERE CEDULA LIKE '" + this.getCedula() + "%' AND COBRO = '" + this.getCobro() + "'";
                     NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
                     Conexion.conectar();
                     NpgsqlDataReader consulta = command.ExecuteReader();
@@ -105,38 +107,58 @@ namespace SCreditos.models
         public string crearCliente(String pDespuesDe, Cliente pClienteActual, Prestamo pPrestamo)
         {
             string mensaje = null;
+            string script = null;
+            NpgsqlCommand command;
 
-        //    try
-        //    {
-        //        CREAR_CLIENTE(P_CEDULA CHARACTER(15), P_NOMBRE CHARACTER(100), P_DIRECCION CHARACTER(100), P_COBRO CHARACTER(100), P_TELEFONO CHARACTER(15), P_DESPUES_DE CHARACTER(20), P_RUTA_DEL_OTRO_CLIENTE INTEGER, P_PRESTAMO_PRESTAMO DECIMAL, P_PRESTAMO_VALOR DECIMAL, P_PRESTAMO_INTERES DECIMAL, P_PRESTAMO_PLAZO INTEGER, P_FECHA_INICIO DATE)
+            try
+            {
+                Conexion.desconectar();
+                // CREAR_CLIENTE(P_CEDULA CHARACTER(15), P_NOMBRE CHARACTER(100), P_DIRECCION CHARACTER(100), P_COBRO CHARACTER(100), P_TELEFONO CHARACTER(15), P_DESPUES_DE CHARACTER(20), P_RUTA_DEL_OTRO_CLIENTE INTEGER, P_PRESTAMO_PRESTAMO DECIMAL, P_PRESTAMO_VALOR DECIMAL, P_PRESTAMO_INTERES DECIMAL, P_PRESTAMO_PLAZO INTEGER, P_FECHA_INICIO DATE)
+                if (pDespuesDe.Equals(CLIENTE_PRIMERO))
+                {
+                    script = "SELECT CREAR_CLIENTE('" + this.getCedula() + "', '" + this.getNombre() + "', '" + this.getDireccion() + "', '" + this.getCobro() + "', '" + this.getTelefono() + "', '" + pDespuesDe + "', 0, " + (long)pPrestamo.getPrestamo() + ", " + (long)pPrestamo.getValor() + ", " + (long)(pPrestamo.getValor() - pPrestamo.getPrestamo()) + ", " + pPrestamo.getPlazo() + ", '" + pPrestamo.getFecha() + "');";
+                    command = new NpgsqlCommand(script, Conexion.conexion);
+                    Conexion.conectar();
+                    command.ExecuteReader();
+                }
+                else
+                {
+                    script = "SELECT CREAR_CLIENTE('" + this.getCedula() + "', '" + this.getNombre() + "', '" + this.getDireccion() + "', '" + this.getCobro() + "', '" + this.getTelefono() + "', '" + pDespuesDe + "', " + pClienteActual.getRuta() + ", " + (long)pPrestamo.getPrestamo() + ", " + (long)pPrestamo.getValor() + ", " + (long)(pPrestamo.getValor() - pPrestamo.getPrestamo()) + ", " + pPrestamo.getPlazo() + ", '" + pPrestamo.getFecha() + "');";
+                    command = new NpgsqlCommand(script, Conexion.conexion);
+                    Conexion.conectar();
+                    command.ExecuteReader();
+                }
 
+                Conexion.desconectar();
 
-        //        st = BaseDatos.createStatement();
-
-
-
-        //        if (pDespuesDe.equals(CLIENTE_PRIMERO))
-        //        {
-        //            rs = st.executeQuery("SELECT CREAR_CLIENTE('" + pClienteNuevo.getCedula() + "', '" + pClienteNuevo.getNombre() + "', '" + pClienteNuevo.getDireccion() + "', '" + pClienteNuevo.getCobro() + "', '" + pClienteNuevo.getTelefono() + "', '" + pDespuesDe + "', 0, " + (long)pPrestamo.getPrestamo() + ", " + (long)pPrestamo.getValor() + ", " + (long)(pPrestamo.getValor() - pPrestamo.getPrestamo()) + ", " + pPrestamo.getPlazo() + ", '" + pPrestamo.getFecha() + "');");
-        //        }
-        //        else
-        //        {
-        //            rs = st.executeQuery("SELECT CREAR_CLIENTE('" + pClienteNuevo.getCedula() + "', '" + pClienteNuevo.getNombre() + "', '" + pClienteNuevo.getDireccion() + "', '" + pClienteNuevo.getCobro() + "', '" + pClienteNuevo.getTelefono() + "', '" + pDespuesDe + "', " + pClienteActual.getRuta() + ", " + (long)pPrestamo.getPrestamo() + ", " + (long)pPrestamo.getValor() + ", " + (long)(pPrestamo.getValor() - pPrestamo.getPrestamo()) + ", " + pPrestamo.getPlazo() + ", '" + pPrestamo.getFecha() + "');");
-        //        }
-        //        st = BaseDatos.createStatement();
-        //        rs = st.executeQuery("SELECT * FROM CLIENTES WHERE CEDULA= '" + pClienteNuevo.getCedula() + "';");
-        //        if (rs.next())
-        //        {
-        //            cliente = new Cliente(rs.getInt("ID"), rs.getInt("RUTA"), rs.getString("CEDULA"), rs.getString("NOMBRE"), rs.getString("DIRECCION"), rs.getString("COBRO"), rs.getString("TELEFONO"), rs.getString("CALIFICACION"));
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        JOptionPane.showMessageDialog(null, e.getStackTrace(), "Consulta: Crear Cliente.", JOptionPane.INFORMATION_MESSAGE, null);
-        //    }
+                script = "SELECT * FROM CLIENTES WHERE CEDULA= '" + this.getCedula() + "';";
+                command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                NpgsqlDataReader consulta = command.ExecuteReader();
+                
+                if (consulta.HasRows)
+                {
+                    mensaje = "Se creo el cliente";
+                    consulta.Read();
+                    this.setId(consulta.GetInt32(0));
+                    this.setRuta(consulta.GetInt32(7));
+                    this.setCedula(consulta.GetString(1));
+                    this.setNombre(consulta.GetString(2));
+                    this.setDireccion(consulta.GetString(3));
+                    this.setCobro(consulta.GetString(4));
+                    this.setTelefono(consulta.GetString(5));
+                    this.setCalificacion(consulta.GetString(6));
+                }
+                Conexion.desconectar();
+            }        
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Crear Cliente.");
+            }
 
             return mensaje;
         }
+
 
         public int getId()
         {

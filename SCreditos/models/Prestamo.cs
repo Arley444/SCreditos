@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Npgsql;
 
@@ -32,7 +33,7 @@ namespace SCreditos.models
             this.interes = this.prestamo * PORCENTAJE_INTERES;
 
             //Calculamos el plazo.
-            if (this.prestamo <= 500000)
+            if (this.prestamo < 500000)
             {
                 this.plazo = PLAZO_BAJO;
             }
@@ -203,11 +204,50 @@ namespace SCreditos.models
             this.cuotaInteres = cuotaInteres;
         }
 
+        public static int getDomingosPrestamo(String pCedula)
+        {
+            int domingos = 0;
+
+            try
+            {
+                Conexion.desconectar();
+                string script = "SELECT * FROM PRESTAMOS WHERE CEDULA_CLIENTE = '" + pCedula + "' AND ESTADO = 'ACTIVO'";
+                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                NpgsqlDataReader consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    consulta.Read();
+                    script = "SELECT OBTENER_DOMINGOS_PRESTAMO(" + consulta.GetInt32(0) + ");";
+                    Conexion.desconectar();
+                    command = new NpgsqlCommand(script, Conexion.conexion);
+                    Conexion.conectar();
+                    consulta = command.ExecuteReader();
+
+                    if (consulta.HasRows)
+                    {
+                        consulta.Read();
+                        domingos = consulta.GetInt32(0);
+                    }
+                }
+
+                Conexion.desconectar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Domingos prestamo.");
+            }
+
+            return domingos;
+        }
+
         public static Prestamo getPrestamoClienteActual(String pCedula)
         {
             prestamoActual = null;
             try
             {
+                Conexion.desconectar();
                 string scrip = "SELECT * FROM PRESTAMOS WHERE CEDULA_CLIENTE = '" + pCedula + "' ORDER BY ID DESC;";
                 NpgsqlCommand command = new NpgsqlCommand(scrip, Conexion.conexion);
                 Conexion.conectar();
@@ -218,7 +258,7 @@ namespace SCreditos.models
                     consulta.Read();
                     prestamoActual = new Prestamo(pCedula, consulta.GetDouble(2) / 1000);
                     prestamoActual.setId(consulta.GetInt32(0));
-                    prestamoActual.setFecha(consulta.GetString(9));
+                    prestamoActual.setFecha(consulta.GetDate(9).ToString());
                     prestamoActual.setValorDebe(consulta.GetDouble(6));
                     prestamoActual.setValorPago(consulta.GetDouble(7));
                 }
@@ -232,5 +272,234 @@ namespace SCreditos.models
 
             return prestamoActual;
         }
+
+        public static List<Cliente> listaPrestamosCanselados(string pFecha)
+        {
+            List<Cliente> listaClientes = null;
+            string script = null;
+            NpgsqlCommand command = null;
+            NpgsqlDataReader consulta = null;
+            try
+            {
+                Conexion.desconectar();
+                script = "SELECT * FROM PRESTAMOS WHERE FECHA_PAGO= '" + pFecha + "';";
+                command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                consulta = command.ExecuteReader();
+                if (consulta.HasRows)
+                {
+                    List<Prestamo> listaPrestamos = new List<Prestamo>();
+                    while (consulta.Read())
+                    {
+                        listaPrestamos.Add(new Prestamo(consulta.GetString(1), consulta.GetDouble(2)));
+                    }
+                    Conexion.desconectar();
+
+                    listaClientes = new List<Cliente>();
+                    listaPrestamos.ForEach(prestamo => {
+                        script = "SELECT * FROM CLIENTES WHERE CEDULA='" + prestamo.getCedulaCliente() + "';";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        consulta = command.ExecuteReader();
+                        if (consulta.HasRows)
+                        {
+                            while (consulta.Read())
+                            {
+                                listaClientes.Add(new Cliente(consulta.GetInt32(0), consulta.GetInt32(7), consulta.GetString(1), consulta.GetString(2), consulta.GetString(3), consulta.GetString(4), consulta.GetString(5), consulta.GetString(6)));
+                            }
+                        }
+                        Conexion.desconectar();
+
+                    });
+                }
+                Conexion.desconectar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Lista Prestamos Cancelados");
+            }
+
+            return listaClientes;
+        }
+
+        public static List<Cliente> listaPrestamosIngresados(string pFecha)
+        {
+            List<Cliente> listaClientes = null;
+            string script = null;
+            NpgsqlCommand command = null;
+            NpgsqlDataReader consulta = null;
+
+            try
+            {
+                Conexion.desconectar();
+                script = "SELECT ID_PRESTAMO FROM ABONOS WHERE FECHA_INICIO= '"+ pFecha + "'  AND VALOR > 0;";
+                command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                //LOS ID DE LOS PRESTAMOS.
+                consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    List<int> listaIdPrestamos = new List<int>();
+                    while (consulta.Read())
+                    {
+                        listaIdPrestamos.Add(consulta.GetInt32(0));
+                    }
+
+                    List<string> listaCedulasClientes = new List<string>();
+                    listaIdPrestamos.ForEach(idPrestamo => {
+                        Conexion.desconectar();
+                        script = "SELECT CEDULA_CLIENTE FROM PRESTAMOS WHERE ID= "+ idPrestamo +";";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        //LAS CEDULAS DE LOS CLIENTES.
+                        consulta = command.ExecuteReader();
+                        consulta.Read();
+                        listaCedulasClientes.Add(consulta.GetString(0));
+                    });
+
+                    listaClientes = new List<Cliente>();
+                    listaCedulasClientes.ForEach(cedulaCliente =>
+                    {
+                        Conexion.desconectar();
+                        script = "SELECT * FROM CLIENTES WHERE CEDULA= '"+ cedulaCliente +"';";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        //LAS CEDULAS DE LOS CLIENTES.
+                        consulta = command.ExecuteReader();
+                        consulta.Read();
+                        listaClientes.Add(new Cliente(consulta.GetInt32(0), consulta.GetInt32(7), consulta.GetString(1), consulta.GetString(2), consulta.GetString(3), consulta.GetString(4), consulta.GetString(5), consulta.GetString(6)));
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Lista Prestamos Ingresados.");
+            }
+
+            return listaClientes;
+        }
+
+        public static List<Cliente> listaPrestamosNuevos(string pFecha)
+        {
+            List<Cliente> listaClientes = null;
+            string script = null;
+            NpgsqlCommand command = null;
+            NpgsqlDataReader consulta = null;
+
+            try
+            {
+                Conexion.desconectar();
+                script = "SELECT CEDULA_CLIENTE FROM PRESTAMOS WHERE FECHA_INICIO= '"+ pFecha +"';";
+                command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                //LOAS CEDULAS DE LOS CLIENTES.
+                consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    List<string> listaCedulasClientes = new List<string>();
+                    while (consulta.Read())
+                    {
+                        listaCedulasClientes.Add(consulta.GetString(0));
+                    }
+
+                    listaClientes = new List<Cliente>();
+                    listaCedulasClientes.ForEach(cedulaCliente =>
+                    {
+                        Conexion.desconectar();
+                        script = "SELECT * FROM CLIENTES WHERE CEDULA= '" + cedulaCliente + "';";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        //LAS CEDULAS DE LOS CLIENTES.
+                        consulta = command.ExecuteReader();
+                        consulta.Read();
+                        listaClientes.Add(new Cliente(consulta.GetInt32(0), consulta.GetInt32(7), consulta.GetString(1), consulta.GetString(2), consulta.GetString(3), consulta.GetString(4), consulta.GetString(5), consulta.GetString(6)));
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Lista Prestamos Nuevos.");
+            }
+
+            return listaClientes;
+        }
+
+        public static List<Cliente> listaClientesNoCuota(string pFecha)
+        {
+            List<Cliente> listaClientes = null;
+            string script = null;
+            NpgsqlCommand command = null;
+            NpgsqlDataReader consulta = null;
+
+            try
+            {
+                Conexion.desconectar();
+                script = "SELECT ID_PRESTAMO FROM ABONOS WHERE FECHA_INICIO= '" + pFecha + "'  AND VALOR= 0;";
+                command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                //LOS ID DE LOS PRESTAMOS.
+                consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    List<int> listaIdPrestamos = new List<int>();
+                    while (consulta.Read())
+                    {
+                        listaIdPrestamos.Add(consulta.GetInt32(0));
+                    }
+
+                    List<string> listaCedulasClientes = new List<string>();
+                    listaIdPrestamos.ForEach(idPrestamo => {
+                        Conexion.desconectar();
+                        script = "SELECT CEDULA_CLIENTE FROM PRESTAMOS WHERE ID= " + idPrestamo + ";";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        //LAS CEDULAS DE LOS CLIENTES.
+                        consulta = command.ExecuteReader();
+                        consulta.Read();
+                        listaCedulasClientes.Add(consulta.GetString(0));
+                    });
+
+                    listaClientes = new List<Cliente>();
+                    listaCedulasClientes.ForEach(cedulaCliente =>
+                    {
+                        Conexion.desconectar();
+                        script = "SELECT * FROM CLIENTES WHERE CEDULA= '" + cedulaCliente + "';";
+                        command = new NpgsqlCommand(script, Conexion.conexion);
+                        Conexion.conectar();
+                        //LAS CEDULAS DE LOS CLIENTES.
+                        consulta = command.ExecuteReader();
+                        consulta.Read();
+                        listaClientes.Add(new Cliente(consulta.GetInt32(0), consulta.GetInt32(7), consulta.GetString(1), consulta.GetString(2), consulta.GetString(3), consulta.GetString(4), consulta.GetString(5), consulta.GetString(6)));
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Lista Prestamos Ingresados.");
+            }
+
+            return listaClientes;
+        }
+
+        public void calificarCliente()
+        {
+            try
+            {
+                Conexion.desconectar();
+                string script = "SELECT CALIFICAR_CLIENTE('" + this.getCedulaCliente() + "');";
+                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Calificar Cliente.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

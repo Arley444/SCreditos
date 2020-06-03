@@ -9,7 +9,7 @@ namespace SCreditos.models
     {
         private long id;
 
-        private String nombre;
+        private string nombre, fechaInicio;
 
         private int capital;
 
@@ -17,7 +17,7 @@ namespace SCreditos.models
 
         private static HashSet<Cobro> lista = null;
 
-        public Cobro(long id, String nombre)
+        public Cobro(long id, string nombre)
         {
             this.id = id;
             this.nombre = nombre;
@@ -36,6 +36,7 @@ namespace SCreditos.models
 
             try
             {
+                Conexion.desconectar();
                 script = "SELECT * FROM COBROS WHERE NOMBRE= '" + this.nombre + "';";
                 NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
                 Conexion.conectar();
@@ -52,7 +53,7 @@ namespace SCreditos.models
                     if (MessageBox.Show("¿ Realmente desea crear el cobro ?", "Crear Cobro", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         Conexion.desconectar();
-                        script = "SELECT CREAR_COBROS('" + this.nombre + "', " + this.capital + ");";
+                        script = "SELECT CREAR_COBROS('" + this.nombre + "', " + this.capital + ", '"+ this.fechaInicio +"');";
                         command = new NpgsqlCommand(script, Conexion.conexion);
                         Conexion.conectar();
                         command.ExecuteReader();
@@ -79,6 +80,7 @@ namespace SCreditos.models
         {
             try
             {
+                Conexion.desconectar();
                 script = "SELECT * FROM COBROS;";
                 NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
                 Conexion.conectar();
@@ -120,9 +122,19 @@ namespace SCreditos.models
             return nombre;
         }
 
-        public void setNombre(String nombre)
+        public void setNombre(string nombre)
         {
             this.nombre = nombre;
+        }
+
+        public string getFechaInicio()
+        {
+            return this.fechaInicio;
+        }
+
+        public void setFechaInicio(string fechaInicio)
+        {
+            this.fechaInicio = fechaInicio;
         }
 
         public int getCapital()

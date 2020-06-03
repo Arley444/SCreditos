@@ -10,8 +10,9 @@ namespace SCreditos.models
     class Conexion
     {
         // Conexion
-        public static NpgsqlConnection conexion = new NpgsqlConnection("Host=127.0.0.1;Username=postgres;Password=123456789;Database=DB_SCREDITOS");        
+        public static NpgsqlConnection conexion = new NpgsqlConnection("Host=127.0.0.1;Username=postgres;Password=123456789;Database=TEST_1");        
 
+        
         public static Boolean conectar()
         {
             Boolean bestado = true;
@@ -20,7 +21,7 @@ namespace SCreditos.models
                 if (conexion.State == System.Data.ConnectionState.Closed)
                 {
                     conexion.Open();
-                }                
+                }         
             }
             catch (Exception e)
             {//Error 

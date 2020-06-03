@@ -32,6 +32,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Npgsql, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.0.0\lib\net451\Npgsql.dll</HintPath>
@@ -58,13 +78,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\Abono.cs" />
+    <Compile Include="models\Cartera.cs" />
     <Compile Include="models\Cliente.cs" />
     <Compile Include="models\Cobro.cs" />
     <Compile Include="models\Conexion.cs" />
+    <Compile Include="models\Contabilidad.cs" />
     <Compile Include="models\Prestamo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="models\Usuario.cs" />
+    <Compile Include="views\dialogs\CargarDomingos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\CargarDomingos.Designer.cs">
+      <DependentUpon>CargarDomingos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\CarteraTirilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\CarteraTirilla.Designer.cs">
+      <DependentUpon>CarteraTirilla.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\dialogs\CrearNuevoCobro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,7 +126,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="views\dialogs\CargarDomingos.resx">
+      <DependentUpon>CargarDomingos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\CarteraTirilla.resx">
+      <DependentUpon>CarteraTirilla.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\CrearNuevoCobro.resx">
       <DependentUpon>CrearNuevoCobro.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +156,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\Login v1.jpg" />
+    <None Include="recursos\Login v2.jpg" />
+    <None Include="recursos\cancel.png" />
+    <None Include="recursos\login.png" />
+    <None Include="recursos\aaaaa.jpg" />
+    <Content Include="utilidades\aaaaa.jpg" />
+    <Content Include="utilidades\accept.png" />
+    <Content Include="utilidades\cancel.png" />
+    <Content Include="utilidades\commerce-and-shopping.png" />
+    <Content Include="utilidades\disclaimer.png" />
+    <Content Include="utilidades\documento.png" />
+    <Content Include="utilidades\edit.png" />
+    <Content Include="utilidades\editar_cliente.png" />
+    <Content Include="utilidades\eliminar_cliente.png" />
+    <Content Include="utilidades\enter.png" />
+    <Content Include="utilidades\error.png" />
+    <Content Include="utilidades\icono-cerrar-sesion-rojo.png" />
+    <Content Include="utilidades\icono-cerrar-sesion.png" />
+    <Content Include="utilidades\information.png" />
+    <Content Include="utilidades\information_1.png" />
+    <Content Include="utilidades\login.png" />
+    <Content Include="utilidades\loupe.png" />
+    <Content Include="utilidades\money.png" />
+    <Content Include="utilidades\next.png" />
+    <Content Include="utilidades\partnership.png" />
+    <Content Include="utilidades\pay.png" />
+    <Content Include="utilidades\payment.png" />
+    <Content Include="utilidades\previou.png" />
+    <Content Include="utilidades\Scrip SQL Sandra 1.0.txt" />
+    <Content Include="utilidades\time.png" />
+    <Content Include="utilidades\value.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

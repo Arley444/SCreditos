@@ -1,4 +1,5 @@
 ﻿using SCreditos.models;
+using SCreditos.views.dialogs;
 using System;
 using System.Windows.Forms;
 
@@ -13,6 +14,9 @@ namespace SCreditos.views
 
             lblAvisoUsuario.Visible = false;
             lblAvisoPassword.Visible = false;
+
+            txtUsuario.Focus();
+
         }
 
 
@@ -77,6 +81,35 @@ namespace SCreditos.views
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void lblCambiarContrasenna_Click(object sender, EventArgs e)
+        {
+            txtUsuario.Clear();
+            txtContrasenna.Clear();
+
+            CambiarContrasenna cambiarContrasenna = new CambiarContrasenna();
+            cambiarContrasenna.ShowDialog();
+        }
+
+        private void lblCambiarContrasenna_MouseEnter(object sender, EventArgs e)
+        {
+            lblCambiarContrasenna.ForeColor = System.Drawing.Color.MediumSeaGreen;
+        }
+
+        private void lblCambiarContrasenna_MouseLeave(object sender, EventArgs e)
+        {
+            lblCambiarContrasenna.ForeColor = System.Drawing.Color.RoyalBlue;
+        }
+
+        private void btnCerrar_MouseEnter(object sender, EventArgs e)
+        {
+            btnCerrar.BackColor = System.Drawing.Color.MistyRose;
+        }
+
+        private void btnCerrar_MouseLeave(object sender, EventArgs e)
+        {
+            btnCerrar.BackColor = System.Drawing.Color.Transparent;
         }
     }
 }

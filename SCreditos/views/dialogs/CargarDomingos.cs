@@ -13,29 +13,29 @@ namespace SCreditos.views.dialogs
 {
     public partial class CargarDomingos : Form
     {
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        //  ATRIBUTOS
+        // ---------------------------------------------------------------------------------------------------------------------------------
         private int idPrestamo;
-
         private long valorPorDomingo;
         private int domingos;
-        private double valorAbono;
+        private Double valorAbono;
 
-        public CargarDomingos(int pDomingos, double pPrestamoValor, int pPrestamoId)
+
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        //  CONSTRUCTORES
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        public CargarDomingos(Double pPrestamoValor)
         {
             InitializeComponent();
-
-            idPrestamo = pPrestamoId;
-
-            cboDomingos.Items.Clear();
-            int contador = 0;
-            while (contador < pDomingos)
-            {
-                cboDomingos.Items.Add(contador);
-                contador++;
-            }
             valorPorDomingo = ((long)(pPrestamoValor / 50000)) * 2000;
             cargarInterfaz();
         }
 
+
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        //  METODOS
+        // ---------------------------------------------------------------------------------------------------------------------------------
         private void cargarInterfaz()
         {
             if (chkAbono.Checked)
@@ -55,11 +55,6 @@ namespace SCreditos.views.dialogs
             }
         }
 
-        private void chkAbono_CheckStateChanged(object sender, EventArgs e)
-        {
-            cargarInterfaz();
-        }
-
         private Boolean validarFormulario()
         {
             if (chkAbono.Checked && String.IsNullOrEmpty(txtAbono.Text))
@@ -75,14 +70,38 @@ namespace SCreditos.views.dialogs
             return true;
         }
 
+        public Double getValorAbono()
+        {
+            return this.valorAbono;
+        }
+
+        public int getDomingos()
+        {
+            return this.domingos;
+        }
+
+        public long getValorPorDomingo()
+        {
+            return this.valorPorDomingo;
+        }
+
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        //  EVENTOS
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        private void chkAbono_CheckStateChanged(object sender, EventArgs e)
+        {
+            cargarInterfaz();
+        }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿No vas a cargar pago de domingos o abono?", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show("¿No vas a cargar pago de domingos?", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                if (MessageBox.Show("¿Realmente NO?", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show("¿Realmente NO vas a cargar pago de domingos?", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
-                    Abono.pagarDomingos(this.idPrestamo, 0, 0, valorPorDomingo);
+                    valorAbono = 0;
+                    domingos = 0;
+                    //Abono.pagarDomingos(this.idPrestamo, 0, 0, valorPorDomingo);
                     this.Dispose();
                 }
             }
@@ -95,22 +114,29 @@ namespace SCreditos.views.dialogs
                 if (chkAbono.Checked)
                 {
                     valorAbono = Double.Parse(txtAbono.Text);
+                    domingos = Int32.Parse(((long)(valorAbono / valorPorDomingo)).ToString());
 
-                    if (MessageBox.Show("Deseas cargar el pago.", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("Deseas cargar el pago de domingos." +
+                        "\nVALOR A PAGAR: "+ valorAbono +"" +
+                        "\nEQUIVALE A: "+ domingos +" Domingos" +
+                        "\nVALOR POR DOMINGO: "+ valorPorDomingo +"", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        domingos = Int32.Parse(((long)(valorAbono / valorPorDomingo)).ToString());
-                        Abono.pagarDomingos(this.idPrestamo, domingos, valorAbono, valorPorDomingo);
+                        
+                        //Abono.pagarDomingos(this.idPrestamo, domingos, valorAbono, valorPorDomingo);
                         this.Dispose();
                     }
                 }
                 else
                 {
                     domingos = Int32.Parse(cboDomingos.Text);
+                    valorAbono = domingos * this.valorPorDomingo;
 
-                    if (MessageBox.Show("Deseas cargar el pago.", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("Deseas cargar el pago de domingos." +
+                        "\nVALOR A PAGAR: " + valorAbono + "" +
+                        "\nEQUIVALE A: " + domingos + " Domingos" +
+                        "\nVALOR POR DOMINGO: " + valorPorDomingo + "", "CONFIRMACIÓN", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        double valorPagar = domingos * this.valorPorDomingo;
-                        Abono.pagarDomingos(this.idPrestamo, domingos, valorPagar, valorPorDomingo);
+                       // Abono.pagarDomingos(this.idPrestamo, domingos, valorPagar, valorPorDomingo);
                         this.Dispose();
                     }
                 }

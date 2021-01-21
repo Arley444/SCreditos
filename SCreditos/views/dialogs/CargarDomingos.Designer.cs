@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CargarDomingos));
             this.chkAbono = new System.Windows.Forms.CheckBox();
             this.cboDomingos = new System.Windows.Forms.ComboBox();
             this.lblDomingos = new System.Windows.Forms.Label();
@@ -53,6 +54,13 @@
             // 
             this.cboDomingos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDomingos.FormattingEnabled = true;
+            this.cboDomingos.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
             this.cboDomingos.Location = new System.Drawing.Point(109, 29);
             this.cboDomingos.Name = "cboDomingos";
             this.cboDomingos.Size = new System.Drawing.Size(121, 21);
@@ -109,6 +117,7 @@
             this.Controls.Add(this.lblDomingos);
             this.Controls.Add(this.cboDomingos);
             this.Controls.Add(this.chkAbono);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CargarDomingos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CargarDomingos";

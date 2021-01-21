@@ -108,5 +108,73 @@ namespace SCreditos.models
 
             return mensaje;
         }
+
+        public Boolean existeUsuario()
+        {
+            try
+            {
+                Conexion.desconectar();
+                string script = "SELECT * FROM USUARIOS WHERE USUARIO= '" + this.usuario + "'";
+                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                NpgsqlDataReader consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Existe Usuario.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            return false;
+        }
+
+        public Boolean considenContrasennaUsuario()
+        {
+            try
+            {
+                Conexion.desconectar();
+                string script = "SELECT * FROM USUARIOS WHERE USUARIO= '"+ this.getUsuario() +"' AND CONTRASENA= '"+ this.getContrasenna() +"';";
+                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                NpgsqlDataReader consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Considen Contraseña y Usuario.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            return false;
+        }
+
+        public Boolean cambiarContraseña(string pNuevaContraseña)
+        {
+
+            try
+            {
+                Conexion.desconectar();
+                string script = "UPDATE USUARIOS SET CONTRASENA= '"+ pNuevaContraseña +"' WHERE USUARIO= '"+ this.getUsuario() +"';";
+                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                
+
+                return true;                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Considen Contraseña y Usuario.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
     }
 }

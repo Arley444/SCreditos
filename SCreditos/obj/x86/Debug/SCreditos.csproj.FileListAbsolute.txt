@@ -21,3 +21,28 @@ C:\Users\arley.reales\Desktop\PROYECTO SANDRA\SCreditos\SCreditos\bin\x86\Debug\
 C:\Users\arley.reales\Desktop\PROYECTO SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.csproj.CopyComplete
 C:\Users\arley.reales\Desktop\PROYECTO SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.exe
 C:\Users\arley.reales\Desktop\PROYECTO SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.pdb
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\SCreditos.exe.config
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\SCreditos.exe
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\SCreditos.pdb
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\Npgsql.dll
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.ValueTuple.dll
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\Npgsql.pdb
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\Npgsql.xml
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\bin\x86\Debug\System.ValueTuple.xml
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.csprojAssemblyReference.cache
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.Properties.Resources.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.dialogs.CambiarContrasenna.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.dialogs.CargarDomingos.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.dialogs.CarteraTirilla.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.dialogs.CrearNuevoCobro.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.Login.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.views.Principal.resources
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.csproj.GenerateResource.cache
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.csproj.CoreCompileInputs.cache
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.csproj.CopyComplete
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.exe
+C:\Users\Arley Reales Ruiz\OneDrive\Escritorio\PROYECTO_SANDRA\SCreditos\SCreditos\obj\x86\Debug\SCreditos.pdb

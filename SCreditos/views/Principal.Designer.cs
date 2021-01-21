@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNuevoCobro = new System.Windows.Forms.ToolStripMenuItem();
+            this.gastoDiarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCuotaIntereses = new System.Windows.Forms.TextBox();
@@ -57,6 +59,8 @@
             this.tablaPrestamosIngresados = new System.Windows.Forms.DataGridView();
             this.tablaPrestamosCancelados = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblNumeroDePrestamos = new System.Windows.Forms.Label();
+            this.cboPrestamos = new System.Windows.Forms.ComboBox();
             this.txtPlazo = new System.Windows.Forms.TextBox();
             this.txtPrestamo = new System.Windows.Forms.TextBox();
             this.ckbFechaSistema = new System.Windows.Forms.CheckBox();
@@ -78,7 +82,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
-            this.lblTotales = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rdbDespues = new System.Windows.Forms.RadioButton();
             this.rdbAntes = new System.Windows.Forms.RadioButton();
@@ -92,12 +95,13 @@
             this.btnIrPrimerCliente = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnCrearNuevoCliente = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnNuevoPrestamo = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnAgregarOtroGastoContabilidad = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnTirilla = new System.Windows.Forms.Button();
             this.txtContabilidadOtrosGastos = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -109,13 +113,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.txtContabilidadCobro = new System.Windows.Forms.TextBox();
             this.txtContabilidadCobroCapital = new System.Windows.Forms.TextBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.dtpFechaFinalContabilidad = new System.Windows.Forms.DateTimePicker();
-            this.label27 = new System.Windows.Forms.Label();
-            this.dtpFechaInicioContabilidad = new System.Windows.Forms.DateTimePicker();
-            this.label26 = new System.Windows.Forms.Label();
-            this.rdbVarios = new System.Windows.Forms.RadioButton();
-            this.rdbUnico = new System.Windows.Forms.RadioButton();
             this.txtContabilidadCobroInteres = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.errorCedula = new System.Windows.Forms.ErrorProvider(this.components);
@@ -124,6 +121,11 @@
             this.errorDireccion = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorTelefono = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorPrestamo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblCalificacion = new System.Windows.Forms.Label();
+            this.lblTarjetas = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnPasarAClavo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -137,13 +139,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablaDescripcion)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorCedula)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorCobro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorNombreCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorDireccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorTelefono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorPrestamo)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -168,22 +170,30 @@
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuNuevoCobro});
+            this.menuNuevoCobro,
+            this.gastoDiarioToolStripMenuItem});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             // 
             // menuNuevoCobro
             // 
             this.menuNuevoCobro.Name = "menuNuevoCobro";
-            this.menuNuevoCobro.Size = new System.Drawing.Size(180, 22);
+            this.menuNuevoCobro.Size = new System.Drawing.Size(138, 22);
             this.menuNuevoCobro.Text = "Cobro";
             this.menuNuevoCobro.Click += new System.EventHandler(this.menuNuevoCobro_Click);
+            // 
+            // gastoDiarioToolStripMenuItem
+            // 
+            this.gastoDiarioToolStripMenuItem.Name = "gastoDiarioToolStripMenuItem";
+            this.gastoDiarioToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.gastoDiarioToolStripMenuItem.Text = "Gasto Diario";
+            this.gastoDiarioToolStripMenuItem.Click += new System.EventHandler(this.gastoDiarioToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
             // groupBox1
@@ -319,7 +329,7 @@
             this.groupBox2.Controls.Add(this.tablaPrestamosNuevos);
             this.groupBox2.Controls.Add(this.tablaPrestamosIngresados);
             this.groupBox2.Controls.Add(this.tablaPrestamosCancelados);
-            this.groupBox2.Location = new System.Drawing.Point(740, 227);
+            this.groupBox2.Location = new System.Drawing.Point(755, 227);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(356, 388);
             this.groupBox2.TabIndex = 2;
@@ -363,46 +373,64 @@
             // 
             // tablaClientesNoCuota
             // 
+            this.tablaClientesNoCuota.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tablaClientesNoCuota.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaClientesNoCuota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaClientesNoCuota.Location = new System.Drawing.Point(15, 292);
             this.tablaClientesNoCuota.Name = "tablaClientesNoCuota";
             this.tablaClientesNoCuota.ReadOnly = true;
+            this.tablaClientesNoCuota.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.tablaClientesNoCuota.Size = new System.Drawing.Size(287, 84);
             this.tablaClientesNoCuota.TabIndex = 3;
             // 
             // tablaPrestamosNuevos
             // 
+            this.tablaPrestamosNuevos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tablaPrestamosNuevos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaPrestamosNuevos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaPrestamosNuevos.Location = new System.Drawing.Point(15, 201);
             this.tablaPrestamosNuevos.Name = "tablaPrestamosNuevos";
             this.tablaPrestamosNuevos.ReadOnly = true;
+            this.tablaPrestamosNuevos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.tablaPrestamosNuevos.Size = new System.Drawing.Size(287, 84);
             this.tablaPrestamosNuevos.TabIndex = 2;
             // 
             // tablaPrestamosIngresados
             // 
+            this.tablaPrestamosIngresados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tablaPrestamosIngresados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaPrestamosIngresados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaPrestamosIngresados.Location = new System.Drawing.Point(15, 110);
             this.tablaPrestamosIngresados.Name = "tablaPrestamosIngresados";
             this.tablaPrestamosIngresados.ReadOnly = true;
+            this.tablaPrestamosIngresados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.tablaPrestamosIngresados.Size = new System.Drawing.Size(287, 84);
             this.tablaPrestamosIngresados.TabIndex = 1;
             // 
             // tablaPrestamosCancelados
             // 
+            this.tablaPrestamosCancelados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tablaPrestamosCancelados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaPrestamosCancelados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaPrestamosCancelados.Location = new System.Drawing.Point(15, 19);
             this.tablaPrestamosCancelados.Name = "tablaPrestamosCancelados";
             this.tablaPrestamosCancelados.ReadOnly = true;
+            this.tablaPrestamosCancelados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.tablaPrestamosCancelados.Size = new System.Drawing.Size(287, 84);
             this.tablaPrestamosCancelados.TabIndex = 0;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblNumeroDePrestamos);
+            this.groupBox3.Controls.Add(this.cboPrestamos);
             this.groupBox3.Controls.Add(this.txtPlazo);
             this.groupBox3.Controls.Add(this.txtPrestamo);
             this.groupBox3.Controls.Add(this.ckbFechaSistema);
@@ -424,12 +452,30 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.txtCedula);
-            this.groupBox3.Controls.Add(this.lblTotales);
             this.groupBox3.Location = new System.Drawing.Point(12, 38);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(692, 168);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
+            // 
+            // lblNumeroDePrestamos
+            // 
+            this.lblNumeroDePrestamos.AutoSize = true;
+            this.lblNumeroDePrestamos.Location = new System.Drawing.Point(585, 13);
+            this.lblNumeroDePrestamos.Name = "lblNumeroDePrestamos";
+            this.lblNumeroDePrestamos.Size = new System.Drawing.Size(77, 13);
+            this.lblNumeroDePrestamos.TabIndex = 34;
+            this.lblNumeroDePrestamos.Text = "Prestamo 0 / 0";
+            // 
+            // cboPrestamos
+            // 
+            this.cboPrestamos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPrestamos.FormattingEnabled = true;
+            this.cboPrestamos.Location = new System.Drawing.Point(587, 33);
+            this.cboPrestamos.Name = "cboPrestamos";
+            this.cboPrestamos.Size = new System.Drawing.Size(70, 21);
+            this.cboPrestamos.TabIndex = 33;
+            this.cboPrestamos.SelectionChangeCommitted += new System.EventHandler(this.cboPrestamos_SelectionChangeCommitted);
             // 
             // txtPlazo
             // 
@@ -466,6 +512,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(77, 20);
             this.txtTelefono.TabIndex = 29;
+            this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefono_KeyUp);
             // 
             // txtDireccion
             // 
@@ -477,7 +524,6 @@
             // 
             // dpkFecha
             // 
-            this.dpkFecha.Enabled = false;
             this.dpkFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpkFecha.Location = new System.Drawing.Point(340, 114);
             this.dpkFecha.Name = "dpkFecha";
@@ -489,6 +535,7 @@
             // 
             this.txtCuota.Location = new System.Drawing.Point(194, 114);
             this.txtCuota.Name = "txtCuota";
+            this.txtCuota.ReadOnly = true;
             this.txtCuota.Size = new System.Drawing.Size(77, 20);
             this.txtCuota.TabIndex = 26;
             // 
@@ -514,7 +561,7 @@
             this.cboCobro.FormattingEnabled = true;
             this.cboCobro.Location = new System.Drawing.Point(109, 40);
             this.cboCobro.Name = "cboCobro";
-            this.cboCobro.Size = new System.Drawing.Size(92, 21);
+            this.cboCobro.Size = new System.Drawing.Size(162, 21);
             this.cboCobro.TabIndex = 23;
             this.cboCobro.SelectionChangeCommitted += new System.EventHandler(this.cboCobro_SelectionChangeCommitted);
             // 
@@ -617,16 +664,6 @@
             this.txtCedula.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCedula_KeyUp);
             this.txtCedula.MouseUp += new System.Windows.Forms.MouseEventHandler(this.txtCedula_MouseUp);
             // 
-            // lblTotales
-            // 
-            this.lblTotales.AutoSize = true;
-            this.lblTotales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblTotales.Location = new System.Drawing.Point(6, 16);
-            this.lblTotales.Name = "lblTotales";
-            this.lblTotales.Size = new System.Drawing.Size(179, 13);
-            this.lblTotales.TabIndex = 12;
-            this.lblTotales.Text = "CAP_TOTAL = 0     INT_TOTAL = 0";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rdbDespues);
@@ -647,7 +684,6 @@
             this.rdbDespues.TabIndex = 1;
             this.rdbDespues.Text = "Despues";
             this.rdbDespues.UseVisualStyleBackColor = true;
-            this.rdbDespues.CheckedChanged += new System.EventHandler(this.rdbDespues_CheckedChanged);
             // 
             // rdbAntes
             // 
@@ -660,7 +696,6 @@
             this.rdbAntes.TabStop = true;
             this.rdbAntes.Text = "Antes";
             this.rdbAntes.UseVisualStyleBackColor = true;
-            this.rdbAntes.CheckedChanged += new System.EventHandler(this.rdbAntes_CheckedChanged);
             // 
             // groupBox5
             // 
@@ -692,8 +727,8 @@
             this.groupBox7.Controls.Add(this.btnIrPrimerCliente);
             this.groupBox7.Controls.Add(this.btnSalir);
             this.groupBox7.Controls.Add(this.btnCrearNuevoCliente);
-            this.groupBox7.Controls.Add(this.button3);
-            this.groupBox7.Controls.Add(this.button2);
+            this.groupBox7.Controls.Add(this.btnCancelar);
+            this.groupBox7.Controls.Add(this.btnNuevoPrestamo);
             this.groupBox7.Location = new System.Drawing.Point(113, 532);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(403, 84);
@@ -756,7 +791,7 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(55, 23);
             this.btnSalir.TabIndex = 4;
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Text = "&Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -766,27 +801,29 @@
             this.btnCrearNuevoCliente.Name = "btnCrearNuevoCliente";
             this.btnCrearNuevoCliente.Size = new System.Drawing.Size(75, 23);
             this.btnCrearNuevoCliente.TabIndex = 3;
-            this.btnCrearNuevoCliente.Text = "N. cliente";
+            this.btnCrearNuevoCliente.Text = "&Cliente N.";
             this.btnCrearNuevoCliente.UseVisualStyleBackColor = true;
             this.btnCrearNuevoCliente.Click += new System.EventHandler(this.btnCrearNuevoCliente_Click);
             // 
-            // button3
+            // btnCancelar
             // 
-            this.button3.Location = new System.Drawing.Point(167, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Cancelar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnCancelar.Location = new System.Drawing.Point(167, 19);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // button2
+            // btnNuevoPrestamo
             // 
-            this.button2.Location = new System.Drawing.Point(85, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "N. prestamo";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnNuevoPrestamo.Location = new System.Drawing.Point(81, 19);
+            this.btnNuevoPrestamo.Name = "btnNuevoPrestamo";
+            this.btnNuevoPrestamo.Size = new System.Drawing.Size(79, 23);
+            this.btnNuevoPrestamo.TabIndex = 1;
+            this.btnNuevoPrestamo.Text = "&Prestamo N.";
+            this.btnNuevoPrestamo.UseVisualStyleBackColor = true;
+            this.btnNuevoPrestamo.Click += new System.EventHandler(this.btnNuevoPrestamo_Click);
             // 
             // label24
             // 
@@ -802,7 +839,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.Color.Moccasin;
-            this.label25.Location = new System.Drawing.Point(677, 219);
+            this.label25.Location = new System.Drawing.Point(673, 219);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(38, 13);
             this.label25.TabIndex = 1;
@@ -811,7 +848,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.btnAgregarOtroGastoContabilidad);
+            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnTirilla);
             this.panel1.Controls.Add(this.txtContabilidadOtrosGastos);
             this.panel1.Controls.Add(this.label32);
@@ -823,22 +861,35 @@
             this.panel1.Controls.Add(this.label29);
             this.panel1.Controls.Add(this.txtContabilidadCobro);
             this.panel1.Controls.Add(this.txtContabilidadCobroCapital);
-            this.panel1.Controls.Add(this.groupBox8);
             this.panel1.Controls.Add(this.txtContabilidadCobroInteres);
             this.panel1.Controls.Add(this.label23);
             this.panel1.Location = new System.Drawing.Point(522, 234);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(207, 237);
+            this.panel1.Size = new System.Drawing.Size(227, 275);
             this.panel1.TabIndex = 8;
             // 
-            // button4
+            // btnAgregarOtroGastoContabilidad
             // 
-            this.button4.Location = new System.Drawing.Point(117, 203);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(63, 23);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "Confirmar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnAgregarOtroGastoContabilidad.BackColor = System.Drawing.Color.Transparent;
+            this.btnAgregarOtroGastoContabilidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarOtroGastoContabilidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarOtroGastoContabilidad.Image")));
+            this.btnAgregarOtroGastoContabilidad.Location = new System.Drawing.Point(200, 66);
+            this.btnAgregarOtroGastoContabilidad.Name = "btnAgregarOtroGastoContabilidad";
+            this.btnAgregarOtroGastoContabilidad.Size = new System.Drawing.Size(16, 16);
+            this.btnAgregarOtroGastoContabilidad.TabIndex = 29;
+            this.btnAgregarOtroGastoContabilidad.Click += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_Click);
+            this.btnAgregarOtroGastoContabilidad.MouseEnter += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseEnter);
+            this.btnAgregarOtroGastoContabilidad.MouseLeave += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseLeave);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(117, 203);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(63, 23);
+            this.btnSave.TabIndex = 28;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnTirilla
             // 
@@ -952,82 +1003,6 @@
             this.txtContabilidadCobroCapital.TabIndex = 13;
             this.txtContabilidadCobroCapital.Text = "0";
             // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.dtpFechaFinalContabilidad);
-            this.groupBox8.Controls.Add(this.label27);
-            this.groupBox8.Controls.Add(this.dtpFechaInicioContabilidad);
-            this.groupBox8.Controls.Add(this.label26);
-            this.groupBox8.Controls.Add(this.rdbVarios);
-            this.groupBox8.Controls.Add(this.rdbUnico);
-            this.groupBox8.Location = new System.Drawing.Point(13, 91);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(178, 108);
-            this.groupBox8.TabIndex = 5;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Dias";
-            // 
-            // dtpFechaFinalContabilidad
-            // 
-            this.dtpFechaFinalContabilidad.Enabled = false;
-            this.dtpFechaFinalContabilidad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaFinalContabilidad.Location = new System.Drawing.Point(63, 74);
-            this.dtpFechaFinalContabilidad.Name = "dtpFechaFinalContabilidad";
-            this.dtpFechaFinalContabilidad.Size = new System.Drawing.Size(96, 20);
-            this.dtpFechaFinalContabilidad.TabIndex = 31;
-            this.dtpFechaFinalContabilidad.ValueChanged += new System.EventHandler(this.dtpFechaFinalAbono_ValueChanged);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(61, 61);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(35, 13);
-            this.label27.TabIndex = 30;
-            this.label27.Text = "Hasta";
-            // 
-            // dtpFechaInicioContabilidad
-            // 
-            this.dtpFechaInicioContabilidad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaInicioContabilidad.Location = new System.Drawing.Point(64, 28);
-            this.dtpFechaInicioContabilidad.Name = "dtpFechaInicioContabilidad";
-            this.dtpFechaInicioContabilidad.Size = new System.Drawing.Size(96, 20);
-            this.dtpFechaInicioContabilidad.TabIndex = 29;
-            this.dtpFechaInicioContabilidad.ValueChanged += new System.EventHandler(this.dtpFechaInicioAbono_ValueChanged);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(61, 15);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(38, 13);
-            this.label26.TabIndex = 28;
-            this.label26.Text = "Desde";
-            // 
-            // rdbVarios
-            // 
-            this.rdbVarios.AutoSize = true;
-            this.rdbVarios.Location = new System.Drawing.Point(6, 74);
-            this.rdbVarios.Name = "rdbVarios";
-            this.rdbVarios.Size = new System.Drawing.Size(54, 17);
-            this.rdbVarios.TabIndex = 1;
-            this.rdbVarios.Text = "Varios";
-            this.rdbVarios.UseVisualStyleBackColor = true;
-            this.rdbVarios.CheckedChanged += new System.EventHandler(this.rdbVarios_CheckedChanged);
-            // 
-            // rdbUnico
-            // 
-            this.rdbUnico.AutoSize = true;
-            this.rdbUnico.Checked = true;
-            this.rdbUnico.Location = new System.Drawing.Point(6, 29);
-            this.rdbUnico.Name = "rdbUnico";
-            this.rdbUnico.Size = new System.Drawing.Size(53, 17);
-            this.rdbUnico.TabIndex = 0;
-            this.rdbUnico.TabStop = true;
-            this.rdbUnico.Text = "Unico";
-            this.rdbUnico.UseVisualStyleBackColor = true;
-            this.rdbUnico.CheckedChanged += new System.EventHandler(this.rdbUnico_CheckedChanged);
-            // 
             // txtContabilidadCobroInteres
             // 
             this.txtContabilidadCobroInteres.Location = new System.Drawing.Point(107, 9);
@@ -1073,11 +1048,67 @@
             // 
             this.errorPrestamo.ContainerControl = this;
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblCalificacion);
+            this.panel2.Controls.Add(this.lblTarjetas);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Location = new System.Drawing.Point(522, 515);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(207, 100);
+            this.panel2.TabIndex = 9;
+            // 
+            // lblCalificacion
+            // 
+            this.lblCalificacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCalificacion.Location = new System.Drawing.Point(39, 56);
+            this.lblCalificacion.Name = "lblCalificacion";
+            this.lblCalificacion.Size = new System.Drawing.Size(130, 23);
+            this.lblCalificacion.TabIndex = 2;
+            this.lblCalificacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTarjetas
+            // 
+            this.lblTarjetas.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTarjetas.Location = new System.Drawing.Point(3, 19);
+            this.lblTarjetas.Name = "lblTarjetas";
+            this.lblTarjetas.Size = new System.Drawing.Size(59, 15);
+            this.lblTarjetas.TabIndex = 1;
+            this.lblTarjetas.Text = "0/0";
+            this.lblTarjetas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 5);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Tarjetas";
+            // 
+            // btnPasarAClavo
+            // 
+            this.btnPasarAClavo.BackColor = System.Drawing.Color.White;
+            this.btnPasarAClavo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnPasarAClavo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnPasarAClavo.Location = new System.Drawing.Point(12, 574);
+            this.btnPasarAClavo.Name = "btnPasarAClavo";
+            this.btnPasarAClavo.Size = new System.Drawing.Size(73, 41);
+            this.btnPasarAClavo.TabIndex = 10;
+            this.btnPasarAClavo.Text = "Enviar a CLAVO";
+            this.btnPasarAClavo.UseVisualStyleBackColor = false;
+            this.btnPasarAClavo.Click += new System.EventHandler(this.btnPasarAClavo_Click);
+            this.btnPasarAClavo.MouseEnter += new System.EventHandler(this.btnPasarAClavo_MouseEnter);
+            this.btnPasarAClavo.MouseLeave += new System.EventHandler(this.btnPasarAClavo_MouseLeave);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 661);
+            this.Controls.Add(this.btnPasarAClavo);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox5);
@@ -1088,6 +1119,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1150, 700);
             this.MinimumSize = new System.Drawing.Size(1150, 700);
@@ -1112,14 +1144,14 @@
             this.groupBox7.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorCedula)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorCobro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorNombreCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorDireccion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorTelefono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorPrestamo)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1173,7 +1205,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtCedula;
-        private System.Windows.Forms.Label lblTotales;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rdbDespues;
         private System.Windows.Forms.RadioButton rdbAntes;
@@ -1186,8 +1217,8 @@
         private System.Windows.Forms.Button btnIrPrimerCliente;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnCrearNuevoCliente;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnNuevoPrestamo;
         private System.Windows.Forms.Button btnAbonar;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
@@ -1205,15 +1236,8 @@
         private System.Windows.Forms.ErrorProvider errorDireccion;
         private System.Windows.Forms.ErrorProvider errorTelefono;
         private System.Windows.Forms.ErrorProvider errorPrestamo;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.DateTimePicker dtpFechaFinalContabilidad;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.DateTimePicker dtpFechaInicioContabilidad;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.RadioButton rdbVarios;
-        private System.Windows.Forms.RadioButton rdbUnico;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnTirilla;
         private System.Windows.Forms.TextBox txtContabilidadOtrosGastos;
         private System.Windows.Forms.Label label32;
@@ -1222,5 +1246,14 @@
         private System.Windows.Forms.TextBox txtContabilidadUtilidad;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox txtContabilidadPresto;
+        private System.Windows.Forms.Label lblNumeroDePrestamos;
+        private System.Windows.Forms.ComboBox cboPrestamos;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblTarjetas;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCalificacion;
+        private System.Windows.Forms.Button btnPasarAClavo;
+        private System.Windows.Forms.Label btnAgregarOtroGastoContabilidad;
+        private System.Windows.Forms.ToolStripMenuItem gastoDiarioToolStripMenuItem;
     }
 }

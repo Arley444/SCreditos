@@ -77,50 +77,29 @@ namespace SCreditos.models
             return "CAP_TOTAL = "+ totalCapital + "     INT_TOTAL = "+ totalInteres;
         }
 
-        public List<Object> listarCarteras()
+        public static Double getValorCaja(String cobro)
         {
-            listaCarteras = null;
-
             try
             {
                 Conexion.desconectar();
-                script = "SELECT * FROM CARTERAS WHERE NOMBRE_COBRO='" + this.getNombreCobro() + "' ORDER BY FECHA_INICIO ASC;";
+                script = "SELECT * FROM CARTERAS WHERE ID= (SELECT MAX(ID) FROM CARTERAS WHERE NOMBRE_COBRO='" + cobro + "');";
                 command = new NpgsqlCommand(script, Conexion.conexion);
                 Conexion.conectar();
                 consulta = command.ExecuteReader();
                 if (consulta.HasRows)
                 {
-                    listaCarteras = new List<Object>();
-                    while (consulta.Read())
-                    {          
-                        //this.setEstado(consulta.GetString(13));
-                        listaCarteras.Add(new Cartera(
-                            consulta.GetInt32(0),
-                            consulta.GetInt32(4),
-                            this.getNombreCobro(),
-                            consulta.GetDate(2).ToString(),
-                            consulta.GetDate(3).ToString(),
-                            "SAVE",
-                            consulta.GetDouble(5),
-                            consulta.GetDouble(6),
-                            consulta.GetDouble(7),
-                            consulta.GetDouble(8),
-                            consulta.GetDouble(9),
-                            consulta.GetDouble(10),
-                            consulta.GetDouble(11),
-                            consulta.GetDouble(12)
-                            ));
-                    }                    
+                    consulta.Read();
+                    return consulta.GetDouble(12);
                 }
+                Conexion.desconectar();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Consulta: Listar Carteras");
             }
 
-            return listaCarteras;
+            return 0;
         }
-
 
         public void setId(int pId)
         {

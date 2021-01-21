@@ -11,25 +11,15 @@ namespace SCreditos.models
     class Abono
     {
         private int id, idPrestamo;
-        private string fecha;
+        private DateTime fecha;
         private double valor, restante;
-        private String tipo;
+        private static String script;
 
-        public Abono(int id, string fecha, double valor, String tipo, double restante)
+        public Abono(int id, int idPrestamo, DateTime fecha, double valor, double restante)
         {
             this.id = id;
             this.fecha = fecha;
             this.valor = valor;
-            this.tipo = tipo;
-            this.restante = restante;
-        }
-
-        public Abono(int id, string fecha, double valor, String tipo, double restante, int idPrestamo)
-        {
-            this.id = id;
-            this.fecha = fecha;
-            this.valor = valor;
-            this.tipo = tipo;
             this.restante = restante;
             this.idPrestamo = idPrestamo;
         }
@@ -54,7 +44,7 @@ namespace SCreditos.models
             this.id = id;
         }
 
-        public string getFecha()
+        public DateTime getFecha()
         {
             return fecha;
         }
@@ -69,7 +59,7 @@ namespace SCreditos.models
             this.restante = restante;
         }
 
-        public void setFecha(string fecha)
+        public void setFecha(DateTime fecha)
         {
             this.fecha = fecha;
         }
@@ -84,106 +74,118 @@ namespace SCreditos.models
             this.valor = valor;
         }
 
-        public String getTipo()
-        {
-            return tipo;
-        }
+        //public static List<Abono> allByDateAndPayments(string pDate)
+        //{
+        //    List<Abono> listaAbonosCliente = null;
+        //    script = null;
+        //    NpgsqlCommand command = null;
+        //    NpgsqlDataReader consulta = null;
+        //    try
+        //    {
+        //        Conexion.desconectar();
+        //        script = "SELECT * FROM ABONOS WHERE FECHA_INICIO= '" + pDate + "'  AND VALOR > 0;";
+        //        command = new NpgsqlCommand(script, Conexion.conexion);
+        //        Conexion.conectar();
+        //        consulta = command.ExecuteReader();
 
-        public void setTipo(String tipo)
-        {
-            this.tipo = tipo;
-        }
+        //        if (consulta.HasRows)
+        //        {
+        //            listaAbonosCliente = new List<Abono>();
+        //            while (consulta.Read())
+        //            {
+        //                listaAbonosCliente.Add(new Abono(consulta.GetInt32(0), consulta.GetInt32(1), consulta.GetDate(2).ToString(), consulta.GetDouble(3), consulta.GetDouble(4)));
+        //            }
+        //            Conexion.desconectar();
+        //        }
 
-        public static void pagarDomingos(int pIdPrestamo, int pDomingos, double pValorPagar, double pValorPorDomingo)
-        {
-            try
-            {
-                Conexion.desconectar();
-                string script = "SELECT PAGO_DOMINGOS(" + pIdPrestamo + ", " + pDomingos + ", " + pValorPagar + ", " + pValorPorDomingo + ")";
-                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
-                Conexion.conectar();
-                command.ExecuteReader();
-                Conexion.desconectar();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Consulta: Pagar Domingos.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        //        Conexion.desconectar();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message, "Consulta: Listar Abonos Del Cliente: 'allByDateAndPayments'");
+        //    }
 
-        public static void pagarAbono(int pIdPrestamo, string pFecha, double pValor, string pCobro)
-        {
-            try
-            {
-                Conexion.desconectar();
-                string script = "SELECT CARGAR_ABONO(" + pIdPrestamo + ", '" + pFecha + "', " + pValor + ", '" + pCobro + "');";
-                NpgsqlCommand command = new NpgsqlCommand(script, Conexion.conexion);
-                Conexion.conectar();
-                command.ExecuteReader();
-                Conexion.desconectar();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Consulta: Pagar Abono.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        //    return listaAbonosCliente;
+        //}
 
-        public static List<Abono> listaAbonosCliente(string pCedula)
-        {           
-            List<Abono> listaAbonosCliente = null;
-            string script = null;
-            NpgsqlCommand command = null;
-            NpgsqlDataReader consulta = null;
-            try
-            {
-                Conexion.desconectar();
-                script = "SELECT ID, FECHA_INICIO FROM PRESTAMOS WHERE CEDULA_CLIENTE= '" + pCedula + "' AND ESTADO= 'ACTIVO';";
-                command = new NpgsqlCommand(script, Conexion.conexion);
-                Conexion.conectar();
-                consulta = command.ExecuteReader();
-                if (consulta.HasRows)
-                {
-                    consulta.Read();
-                    int idPrestamo = consulta.GetInt32(0);
-                    string fechaInicio = consulta.GetDate(1).ToString();
-                    Conexion.desconectar();
+        //public static List<Abono> allByDateAndNotPayments(string pFecha)
+        //{
+        //    List<Abono> list = null;
+        //    script = null;
+        //    NpgsqlCommand command = null;
+        //    NpgsqlDataReader consulta = null;
 
-                    script = "SELECT * FROM DOMINGOS WHERE ID_PRESTAMO= " + idPrestamo + ";";
-                    command = new NpgsqlCommand(script, Conexion.conexion);
-                    Conexion.conectar();
-                    consulta = command.ExecuteReader();
+        //    try
+        //    {
+        //        Conexion.desconectar();
+        //        script = "SELECT * FROM ABONOS WHERE FECHA_INICIO= '" + pFecha + "'  AND VALOR= 0;;";
+        //        command = new NpgsqlCommand(script, Conexion.conexion);
+        //        Conexion.conectar();
+        //        consulta = command.ExecuteReader();
 
-                    if (consulta.HasRows)
-                    {
-                        listaAbonosCliente = new List<Abono>();
-                        while (consulta.Read())
-                        {
-                            listaAbonosCliente.Add(new Abono(consulta.GetInt32(0), fechaInicio, consulta.GetDouble(3), "DOMINGOS", consulta.GetDouble(5)));
-                        }
-                        Conexion.desconectar();
+        //        if (consulta.HasRows)
+        //        {
+        //            list = new List<Abono>();
+        //            while (consulta.Read())
+        //            {
+        //                list.Add(new Abono(consulta.GetInt32(0), consulta.GetInt32(1), consulta.GetDate(2).ToString(), consulta.GetDouble(3), consulta.GetDouble(4)));
+        //            }
+        //        }
+        //        Conexion.desconectar();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message, "Consulta: Lista Abonos No Pagos. 'allByDateAndNotPayments'");
+        //    }
 
-                        script = "SELECT * FROM ABONOS WHERE ID_PRESTAMO= " + idPrestamo + ";";
-                        command = new NpgsqlCommand(script, Conexion.conexion);
-                        Conexion.conectar();
-                        consulta = command.ExecuteReader();
+        //    return list;
+        //}
 
-                        if (consulta.HasRows)
-                        {
-                            while (consulta.Read())
-                            {
-                                listaAbonosCliente.Add(new Abono(consulta.GetInt32(0), consulta.GetDate(2).ToString(), consulta.GetDouble(3), "ABONO", consulta.GetDouble(4)));
-                            }
-                        }
-                    }
-                }
-                Conexion.desconectar();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Consulta: Listar Abonos Del Cliente");
-            }
+        //public static List<Abono> listaAbonosCliente(string pFechaInicio, int pIdPrestamo)
+        //{           
+        //    List<Abono> listaAbonosCliente = null;
+        //    script = null;
+        //    NpgsqlCommand command = null;
+        //    NpgsqlDataReader consulta = null;
+        //    try
+        //    {
+        //        Conexion.desconectar();
+        //        script = "SELECT * FROM DOMINGOS WHERE ID_PRESTAMO= " + pIdPrestamo + ";";
+        //            command = new NpgsqlCommand(script, Conexion.conexion);
+        //            Conexion.conectar();
+        //            consulta = command.ExecuteReader();
 
-            return listaAbonosCliente;
-        }
+        //            if (consulta.HasRows)
+        //            {
+        //                listaAbonosCliente = new List<Abono>();
+        //                while (consulta.Read())
+        //                {
+        //                    listaAbonosCliente.Add(new Abono(consulta.GetInt32(0), pFechaInicio, consulta.GetDouble(3), "DOMINGOS", consulta.GetDouble(5)));
+        //                }
+        //                Conexion.desconectar();
+
+        //                script = "SELECT * FROM ABONOS WHERE ID_PRESTAMO= " + pIdPrestamo + ";";
+        //                command = new NpgsqlCommand(script, Conexion.conexion);
+        //                Conexion.conectar();
+        //                consulta = command.ExecuteReader();
+
+        //                if (consulta.HasRows)
+        //                {
+        //                    while (consulta.Read())
+        //                    {
+        //                        listaAbonosCliente.Add(new Abono(consulta.GetInt32(0), consulta.GetDate(2).ToString(), consulta.GetDouble(3), "ABONO", consulta.GetDouble(4)));
+        //                    }
+        //                }
+        //            }
+
+        //        Conexion.desconectar();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message, "Consulta: Listar Abonos Del Cliente");
+        //    }
+
+        //    return listaAbonosCliente;
+        //}
     }
 }

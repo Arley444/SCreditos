@@ -1,4 +1,5 @@
 ﻿using SCreditos.models;
+using SCreditos.usecase.cartera;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,10 +10,13 @@ namespace SCreditos.views.dialogs
     {
         private List<Cartera> listaCarteras;
 
-        public CarteraTirilla(List<Object> pListaCarteras)
+        public CarteraTirilla(String pCobro)
         {
             InitializeComponent();
-                       
+
+            listaCarteras = ConsultarCarterasUseCase.consultarCarteras(pCobro);
+
+
             tablaCarteras.ColumnCount = 10;
             tablaCarteras.Columns[0].Name = "FECHA";
             tablaCarteras.Columns[1].Name = "TARJETAS";
@@ -25,13 +29,13 @@ namespace SCreditos.views.dialogs
             tablaCarteras.Columns[8].Name = "CARTERA";
             tablaCarteras.Columns[9].Name = "CAJA";
 
-            foreach (Cartera cartera in pListaCarteras)
+            foreach (Cartera cartera in listaCarteras)
             {
                 Console.WriteLine(cartera.getCartera());
                 tablaCarteras.Rows.Add(
                     new string[]
                     {
-                        cartera.getFechaInicio() + " - " + cartera.getFechaFinal(),
+                        cartera.getFechaInicio() + " / " + cartera.getFechaFinal(),
                         cartera.getTarjetas().ToString(),
                         cartera.getCobro().ToString(),
                         cartera.getPresto().ToString(),

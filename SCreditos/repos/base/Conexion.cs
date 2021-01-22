@@ -13,8 +13,8 @@ namespace SCreditos.models
         public const String PASSWORD = "123456789";
         //public const String PASSWORD = "1243568790";
 
-        public const String DATA_BASE = "TEST";
-        //public const String DATA_BASE = "DB_SCREDITOS";
+        //public const String DATA_BASE = "TEST";
+        public const String DATA_BASE = "DB_SCREDITOS";
 
 
 

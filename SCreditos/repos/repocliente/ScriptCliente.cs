@@ -38,11 +38,24 @@ namespace SCreditos.repos.repocliente
 
         public static String create_one_cliente_despues(String pDespuesDe, int ruta, Cliente pCliente)
         {
+            Console.WriteLine("SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', " + ruta + ", " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "');");
+
             script = "SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', "+ ruta +", " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "');";
 
             Console.WriteLine("SQL: " + script);
 
             return script;
-        }        
+        }
+
+        public static String editar_ruta_cliente(String pCedulaClienteActual, String pCobro, String pAccion, int pRutaClienteProximo)
+        {
+            Console.WriteLine("SELECT EDITAR_RUTA_CLIENTE('" + pCedulaClienteActual + "', '" + pCobro + "', '" + pAccion + "', " + pRutaClienteProximo + ");");
+
+            script = "SELECT EDITAR_RUTA_CLIENTE('" + pCedulaClienteActual + "', '" + pCobro + "', '" + pAccion + "', " + pRutaClienteProximo + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
     }
 }

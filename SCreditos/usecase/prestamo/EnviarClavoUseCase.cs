@@ -10,9 +10,9 @@ namespace SCreditos.usecase.prestamo
 {
     class EnviarClavoUseCase
     {
-        public static Cobro enviarClavo(Cobro cobro, Prestamo prestamo)
+        public static Cobro enviarClavo(Cobro cobro, Prestamo prestamo, DateTime fecha)
         {
-            return new RepositoryPrestamo().enviarClavo(cobro, prestamo);
+            return new RepositoryPrestamo().enviarClavo(cobro, prestamo, fecha);
         }
     }
 }

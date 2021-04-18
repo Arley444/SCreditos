@@ -12,6 +12,7 @@ using SCreditos.usecase.contabilidad;
 using SCreditos.models.common;
 using SCreditos.usecase.gasto;
 using SCreditos.usecase.cartera;
+using SCreditos.usecase.cliente;
 
 namespace SCreditos.views
 {
@@ -192,7 +193,7 @@ namespace SCreditos.views
 
             if (!ListValidators.validarListaVaciaONula(pPrestamo.getAbonos()))
             {
-                pPrestamo.getAbonos().ForEach(abono => tablaDescripcion.Rows.Add(new string[] { abono.getFecha().ToShortDateString(), abono.getValor().ToString(), abono.getRestante().ToString(), "ABONO" }));
+                pPrestamo.getAbonos().ForEach(abono => tablaDescripcion.Rows.Add(new string[] { abono.getFecha().ToShortDateString(), abono.getValor().ToString(), abono.getRestante().ToString(), abono.getTipoAbono()}));
             }
         }
 
@@ -1158,7 +1159,7 @@ namespace SCreditos.views
                 {
                     if(MessageBox.Show("¿Realmente desean enviar a CLAVO", "CONFIRMACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        cobroActual = EnviarClavoUseCase.enviarClavo(cobroActual, prestamoActual);
+                        cobroActual = EnviarClavoUseCase.enviarClavo(cobroActual, prestamoActual, new DateTime(dpkFecha.Value.Year, dpkFecha.Value.Month, dpkFecha.Value.Day));
                         listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
                         clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
                         listaPrestamosActuales = clienteActual.getPrestamos();
@@ -1188,6 +1189,33 @@ namespace SCreditos.views
             }
 
             return false;
+        }
+
+        private void cambiarRutaCliente()
+        {
+            if (formularioCrearNuevoClienteValido())
+            {
+                EditarRutaCliente editarRutaCliente= new EditarRutaCliente(cobroActual, clienteActual);
+                editarRutaCliente.ShowDialog();
+
+                if (!ObjectUtils.isNull(editarRutaCliente.getAccion())){
+                    cobroActual = EditarRutaClienteUseCase.editarRutaCliente(editarRutaCliente.getClienteActual() as Cliente, editarRutaCliente.getClienteProximo() as Cliente, editarRutaCliente.getAccion());
+
+                    listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    prestamoActual = clienteActual.getPrestamos()[0];
+
+                    cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                    cargarPanelDescripcion(prestamoActual);
+                    cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    cargarPanelPrestamo(prestamoActual);
+                    cargarPanelTablas(cobroActual);
+
+                    MessageBox.Show("Se actualizo la ruta del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
         }
 
         // ---------------------------------------------------------------------------------------------------------------------------------
@@ -1538,6 +1566,11 @@ namespace SCreditos.views
         private void btnPasarAClavo_Click(object sender, EventArgs e)
         {
             enviarAClavo();
+        }
+
+        private void btnEditarRuta_Click(object sender, EventArgs e)
+        {
+            cambiarRutaCliente();
         }
     }
 }

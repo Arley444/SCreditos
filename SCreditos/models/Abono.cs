@@ -13,7 +13,17 @@ namespace SCreditos.models
         private int id, idPrestamo;
         private DateTime fecha;
         private double valor, restante;
-        private static String script;
+        private String tipoAbono;
+
+        public Abono(int id, int idPrestamo, DateTime fecha, double valor, double restante, String pTipoAbono)
+        {
+            this.id = id;
+            this.fecha = fecha;
+            this.valor = valor;
+            this.restante = restante;
+            this.idPrestamo = idPrestamo;
+            this.tipoAbono = pTipoAbono;
+        }
 
         public Abono(int id, int idPrestamo, DateTime fecha, double valor, double restante)
         {
@@ -72,6 +82,16 @@ namespace SCreditos.models
         public void setValor(double valor)
         {
             this.valor = valor;
+        }
+
+        public String getTipoAbono()
+        {
+            return tipoAbono;
+        }
+
+        public void setTipoAbono(String pTipoAbono)
+        {
+            this.tipoAbono = pTipoAbono;
         }
 
         //public static List<Abono> allByDateAndPayments(string pDate)

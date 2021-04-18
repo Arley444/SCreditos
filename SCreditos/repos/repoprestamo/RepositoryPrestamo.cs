@@ -66,10 +66,7 @@ namespace SCreditos.repos.repoprestamo
                         }
                         else
                         {
-                            Prestamo prestamo = new Prestamo(consulta.GetString(1), consulta.GetDouble(3) / 1000);
-
-
-
+                            Prestamo prestamo = new Prestamo(consulta.GetString(1), consulta.GetDouble(2) / 1000, consulta.GetDouble(3));
                             prestamo.setId(consulta.GetInt32(0));
                             prestamo.setValorDebe(consulta.GetDouble(6));
                             prestamo.setValorPago(consulta.GetDouble(7));
@@ -241,12 +238,12 @@ namespace SCreditos.repos.repoprestamo
             }
         }
 
-        public Cobro enviarClavo(Cobro cobro, Prestamo prestamo)
+        public Cobro enviarClavo(Cobro cobro, Prestamo prestamo, DateTime fecha)
         {
             try
             {
                 Conexion.desconectar();
-                command = new NpgsqlCommand(ScriptPrestamo.enviar_clavo(cobro, prestamo), Conexion.conexion);
+                command = new NpgsqlCommand(ScriptPrestamo.enviar_clavo(cobro, prestamo, fecha), Conexion.conexion);
                 Conexion.conectar();
                 command.ExecuteReader();
 

@@ -88,6 +88,68 @@ namespace SCreditos.models
             this.cuotaCapital = this.cuota - this.cuotaInteres;
         }
 
+        public Prestamo(String pCedula, double pPrestamo, double pValor)
+        {
+            this.cedulaCliente = pCedula;
+
+            // Valor que solicito el cliente.
+            this.prestamo = pPrestamo * 1000;
+
+            // Calculamos intereses        
+            this.interes = pValor - this.prestamo;
+
+            //Calculamos el plazo.
+            if (this.prestamo < 500000)
+            {
+                this.plazo = PLAZO_BAJO;
+            }
+            else
+            {
+                this.plazo = PLAZO_ALTO;
+            }
+
+            // Calculamos el valor total del prestamo.
+            this.valor = this.prestamo + this.interes;
+
+            //Ajustamos el valor total.
+            double divisor = this.valor % 1000;
+            if (divisor > 500)
+            {
+                this.valor = this.valor + (1000 - divisor);
+            }
+            else
+            {
+                this.valor = this.valor - divisor;
+            }
+
+            //Calculamos cuotas.
+            this.cuota = (this.valor / this.plazo);
+
+            // Ajustamos el valor de la cuota.
+            divisor = this.cuota % 100;
+            if (divisor > 50)
+            {
+                this.cuota = this.cuota + (100 - divisor);
+            }
+            else
+            {
+                this.cuota = this.cuota - divisor;
+            }
+
+            //Calculamos el interes de la cuota.
+            this.cuotaInteres = this.cuota * PORCENTAJE_INTERES;
+
+            // Ajustamos el valor del interes de la cuota.
+            divisor = this.cuotaInteres % 100;
+            if (divisor < 100)
+            {
+                this.cuotaInteres = this.cuotaInteres - divisor;
+            }
+
+            //Calculamos el capital de la cuota.
+            this.cuotaCapital = this.cuota - this.cuotaInteres;
+        }
+
         public DateTime getFechaInicio()
         {
             return this.fechaInicio;

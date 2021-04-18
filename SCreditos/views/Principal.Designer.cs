@@ -126,6 +126,7 @@
             this.lblTarjetas = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnPasarAClavo = new System.Windows.Forms.Button();
+            this.btnEditarRuta = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -509,6 +510,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(524, 114);
+            this.txtTelefono.MaxLength = 10;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(77, 20);
             this.txtTelefono.TabIndex = 29;
@@ -1102,11 +1104,25 @@
             this.btnPasarAClavo.MouseEnter += new System.EventHandler(this.btnPasarAClavo_MouseEnter);
             this.btnPasarAClavo.MouseLeave += new System.EventHandler(this.btnPasarAClavo_MouseLeave);
             // 
+            // btnEditarRuta
+            // 
+            this.btnEditarRuta.BackColor = System.Drawing.Color.White;
+            this.btnEditarRuta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnEditarRuta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnEditarRuta.Location = new System.Drawing.Point(12, 292);
+            this.btnEditarRuta.Name = "btnEditarRuta";
+            this.btnEditarRuta.Size = new System.Drawing.Size(95, 25);
+            this.btnEditarRuta.TabIndex = 11;
+            this.btnEditarRuta.Text = "Editar Ruta";
+            this.btnEditarRuta.UseVisualStyleBackColor = false;
+            this.btnEditarRuta.Click += new System.EventHandler(this.btnEditarRuta_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 661);
+            this.Controls.Add(this.btnEditarRuta);
             this.Controls.Add(this.btnPasarAClavo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -1255,5 +1271,6 @@
         private System.Windows.Forms.Button btnPasarAClavo;
         private System.Windows.Forms.Label btnAgregarOtroGastoContabilidad;
         private System.Windows.Forms.ToolStripMenuItem gastoDiarioToolStripMenuItem;
+        private System.Windows.Forms.Button btnEditarRuta;
     }
 }

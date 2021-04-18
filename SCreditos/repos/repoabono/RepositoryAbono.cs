@@ -37,7 +37,7 @@ namespace SCreditos.repos.repoabono
                     List<Abono> lista = new List<Abono>();
                     while (consulta.Read())
                     {
-                        lista.Add(new Abono(consulta.GetInt32(0), pIdPrestamo, new DateTime(consulta.GetDate(2).Year, consulta.GetDate(2).Month, consulta.GetDate(2).Day), consulta.GetDouble(3), consulta.GetDouble(4)));
+                        lista.Add(new Abono(consulta.GetInt32(0), pIdPrestamo, new DateTime(consulta.GetDate(2).Year, consulta.GetDate(2).Month, consulta.GetDate(2).Day), consulta.GetDouble(3), consulta.GetDouble(4), consulta.GetString(5)));
                     }
 
                     return lista;

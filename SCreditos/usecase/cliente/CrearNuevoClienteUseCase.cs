@@ -1,6 +1,5 @@
 ﻿using SCreditos.models;
 using SCreditos.repos.repocliente;
-using System.Collections.Generic;
 using System;
 
 namespace SCreditos.usecase

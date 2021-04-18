@@ -62,7 +62,28 @@ namespace SCreditos.repos.repocliente
             }
             return null;
         }
-        
+
+        public Cobro editarRutaCliente(Cliente pClienteActual, Cliente pClienteProximo, String pAccion)
+        {
+            try
+            {
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_ruta_cliente(pClienteActual.getCedula(), pClienteActual.getCobro(), pAccion, pClienteProximo.getRuta()), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pClienteActual.getCobro());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Editar ruta cliente");
+            }
+            return null;
+        }
+
         public List<Cliente> findAllClientesByCobro(String pCobro)
         {
             try

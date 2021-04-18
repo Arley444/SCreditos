@@ -17,7 +17,7 @@ namespace SCreditos.factory
         {
             try
             {
-                int i = Convert.ToInt32(pCampo);
+                long i = Convert.ToInt64(pCampo);
                 return true;
             }
             catch (Exception e)

@@ -193,3 +193,4 @@ D:\PROYECTO_SANDRA\SCreditos\SCreditos\bin\Debug\System.Diagnostics.DiagnosticSo
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\bin\Debug\System.Interactive.Async.xml
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.AgregarGastoContabilidad.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.AgregarGastoDiario.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarRutaCliente.resources

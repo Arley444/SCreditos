@@ -35,9 +35,9 @@ namespace SCreditos.repos.repoprestamo
             return "SELECT CALIFICAR_PRESTAMO('" + pPrestamo.getId() + "');";
         }
 
-        public static String enviar_clavo(Cobro cobro, Prestamo prestamo)
+        public static String enviar_clavo(Cobro cobro, Prestamo prestamo, DateTime fecha)
         {
-            return "SELECT ENVIAR_CLAVO("+ prestamo.getId() +", '"+ cobro.getNombre() +"');";
+            return "SELECT ENVIAR_CLAVO("+ prestamo.getId() +", '"+ cobro.getNombre() +"'" + ", '" + fecha.ToShortDateString() + "');";
         }
     }
 }

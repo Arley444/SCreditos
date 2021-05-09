@@ -31,6 +31,15 @@ namespace SCreditos.views.dialogs
             lblValorCuota.Text = prestamo.getCuota().ToString();
             txtValorAbono.Text = prestamo.getCuota().ToString();
 
+            if (ListValidators.validarListaVaciaONula(prestamo.getAbonos()))
+            {
+                dpkFecha.Value = prestamo.getFechaInicio();
+            }
+            else
+            {
+                dpkFecha.Value = prestamo.getAbonos()[prestamo.getAbonos().Count - 1].getFecha();
+            }            
+
             txtValorAbono.Focus();
             txtValorAbono.Select();
         }

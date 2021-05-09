@@ -1082,7 +1082,7 @@ namespace SCreditos.views
                 {
                     Gasto gasto = new Gasto(agregarGastoDiario.getCobro(), agregarGastoDiario.getNombre(), agregarGastoDiario.getDescripcion(), agregarGastoDiario.getFecha(), agregarGastoDiario.getValor());
 
-                    GuardarGastoDiario.guardarGasto(gasto);
+                    GuardarGastoDiarioUseCase.guardarGasto(gasto);
                 }
             }
             else
@@ -1093,16 +1093,34 @@ namespace SCreditos.views
 
         private void agregarOtroGastoContabilidad()
         {
-            if (!ObjectUtils.isNull(contabilidadActual) && !ObjectUtils.isNull(cobroActual))
+            if (!ObjectUtils.isNull(cobroActual))
             {
-                if (contabilidadActual.getEstado().Equals(TipoEstados.NO_GUARDADO))
+                if (!ObjectUtils.isNull(contabilidadActual))
                 {
-                    AgregarGastoContabilidad agregarGastoContabilidad = new AgregarGastoContabilidad(contabilidadActual, dpkFecha.Value, cobroActual.getNombre());
-                    agregarGastoContabilidad.ShowDialog();
+                    if (contabilidadActual.getEstado().Equals(TipoEstados.NO_GUARDADO))
+                    {
+                        AgregarGastoContabilidad agregarGastoContabilidad = new AgregarGastoContabilidad(contabilidadActual, dpkFecha.Value, cobroActual.getNombre());
+                        agregarGastoContabilidad.ShowDialog();
+
+                        if (agregarGastoContabilidad.getAgrego())
+                        {
+                            Console.WriteLine(agregarGastoContabilidad.getValorGasto());
+                            contabilidadActual = AgregarOtroGastoUseCase.agregarGasto(contabilidadActual.getId(), cobroActual.getNombre(), agregarGastoContabilidad.getDescripcionGasto(), agregarGastoContabilidad.getFecha(), agregarGastoContabilidad.getValorGasto());
+                            listaContabilidades[listaContabilidades.FindIndex(c => c.getId() == contabilidadActual.getId())] = contabilidadActual;
+
+                            MessageBox.Show("Gasto agregado exitosamente.", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            cargarContabilidadoByFecha();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No es posible agragar gasto a la contabilidad ya que la contabilidad fue guardada.", "No se puede agregar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("No es posible agragar gasto a la contabilidad ya que la contabilidad fue guardada.", "No se puede agregar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Primero debes cargar abonos para poder cargar otros gastos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -1140,13 +1158,32 @@ namespace SCreditos.views
         {
             if (formularioCrearNuevoClienteValido())
             {
-                List<Contabilidad> contabilidads = ConsultarContabilidadesFechaCobro.consultarContabilidadFechaCobro(cobroActual, dpkFecha.Value.ToShortDateString());
+                cargarContabilidad();
+                List<Contabilidad> contabilidads = listaContabilidades.FindAll(c => c.getNombreCobro().Equals(cobroActual.getNombre()) && c.getEstado().Equals(TipoEstados.NO_GUARDADO));
 
-                if (!ListValidators.validarListaVaciaONula(contabilidads))
+                if (ListValidators.validarListaVaciaONula(contabilidads))
                 {
-                    Contabilidad c = contabilidads[0];
+                    MessageBox.Show("No hay contabilidades para procesar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    List<Object> list = new List<Object>();
+                    contabilidads.ForEach(co =>
+                    {
+                        list.Add(co as Object);
+                    });
 
-                    MessageBox.Show(c.getId() + " / " + c.getNombreCobro() + " / " + c.getTarjetas() + " / " + c.getFecha() + " / " + c.getCobro() + " / " + c.getPresto() + " / " + c.getUtilidad());
+                    CargarCarteraView cargarCarteraView = new CargarCarteraView(cobroActual.getNombre(), list);
+                    cargarCarteraView.ShowDialog();
+
+                    if (cargarCarteraView.seGuardo())
+                    {
+                        List<Contabilidad> contabilidadesAGuardar = new List<Contabilidad>();
+                        cargarCarteraView.getContabilidadesAGuardar().ForEach(co =>
+                        {
+                            contabilidadesAGuardar.Add(co as Contabilidad);
+                        });
+                    }
                 }
             }
         }
@@ -1540,7 +1577,7 @@ namespace SCreditos.views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            calcularCartera();
+            //calcularCartera();
         }
 
         private void btnAgregarOtroGastoContabilidad_MouseEnter(object sender, EventArgs e)

@@ -41,5 +41,14 @@ namespace SCreditos.repos.repocontabilidad
 
             return script;
         }
+
+        public static String select_by_Id(int pId)
+        {
+            script = "SELECT * FROM CONTABILIDADES WHERE ID= " + pId + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
     }
 }

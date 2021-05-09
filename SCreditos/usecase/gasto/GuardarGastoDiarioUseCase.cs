@@ -3,7 +3,7 @@ using SCreditos.repos.repogasto;
 
 namespace SCreditos.usecase.gasto
 {
-    class GuardarGastoDiario
+    class GuardarGastoDiarioUseCase
     {
         public static void guardarGasto(Gasto gasto)
         {

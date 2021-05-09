@@ -134,5 +134,32 @@ namespace SCreditos.repos.repocontabilidad
 
             return null;
         }
+
+        public Contabilidad findById(int pId)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptContabilidad.select_by_Id(pId), Conexion.conexion);
+                Conexion.conectar();
+                consulta = command.ExecuteReader();
+
+                if (consulta.HasRows)
+                {
+                    while (consulta.Read())
+                    {
+                        return new Contabilidad(consulta.GetInt32(0), consulta.GetString(1), new DateTime(consulta.GetDate(2).Year, consulta.GetDate(2).Month, consulta.GetDate(2).Day), consulta.GetInt32(3), consulta.GetDouble(4), consulta.GetDouble(5), consulta.GetDouble(6), consulta.GetDouble(7), consulta.GetDouble(8), consulta.GetString(9));
+                    }
+                }
+
+                Conexion.desconectar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Cargando contabilidad por ID.");
+            }
+
+            return null;
+        }
     }
 }

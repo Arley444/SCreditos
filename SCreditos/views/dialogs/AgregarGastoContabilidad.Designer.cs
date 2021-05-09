@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarGastoContabilidad));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,8 +36,14 @@
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtValorGasto = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.errorValorGasto = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.errorDescripcionGasto = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorValorGasto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorDescripcionGasto)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -75,7 +82,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(38, 136);
+            this.btnAgregar.Location = new System.Drawing.Point(38, 172);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(56, 26);
             this.btnAgregar.TabIndex = 4;
@@ -85,19 +92,21 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(136, 136);
+            this.btnCancelar.Location = new System.Drawing.Point(136, 172);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(65, 26);
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // textBox1
+            // txtValorGasto
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 92);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
+            this.txtValorGasto.Location = new System.Drawing.Point(103, 92);
+            this.txtValorGasto.Name = "txtValorGasto";
+            this.txtValorGasto.Size = new System.Drawing.Size(100, 20);
+            this.txtValorGasto.TabIndex = 7;
+            this.txtValorGasto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtValorGasto_KeyUp);
             // 
             // label3
             // 
@@ -108,12 +117,39 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Valor Gasto:";
             // 
+            // errorValorGasto
+            // 
+            this.errorValorGasto.ContainerControl = this;
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(103, 120);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(100, 42);
+            this.txtDescripcion.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(31, 123);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Descripcion:";
+            // 
+            // errorDescripcionGasto
+            // 
+            this.errorDescripcionGasto.ContainerControl = this;
+            // 
             // AgregarGastoContabilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 182);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(238, 211);
+            this.Controls.Add(this.txtDescripcion);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtValorGasto);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
@@ -122,10 +158,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(254, 221);
-            this.MinimumSize = new System.Drawing.Size(254, 221);
+            this.MaximumSize = new System.Drawing.Size(254, 250);
+            this.MinimumSize = new System.Drawing.Size(254, 250);
             this.Name = "AgregarGastoContabilidad";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Agregar Gasto";
+            ((System.ComponentModel.ISupportInitialize)(this.errorValorGasto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorDescripcionGasto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,7 +178,11 @@
         private System.Windows.Forms.TextBox txtFecha;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtValorGasto;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ErrorProvider errorValorGasto;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider errorDescripcionGasto;
     }
 }

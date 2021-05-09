@@ -5,6 +5,8 @@ namespace SCreditos.repos.repoprestamo
 {
     class ScriptPrestamo
     {
+        private static String script;
+
         public static String select_one_prestamo_by_cedula_cliente(String pCedula)
         {
             return "SELECT * FROM PRESTAMOS WHERE CEDULA_CLIENTE= '" + pCedula + "';";
@@ -12,7 +14,11 @@ namespace SCreditos.repos.repoprestamo
 
         public static String cancelar_one_prestamo(Prestamo pIdPrestamo, DateTime pFecha, Cobro pCobro)
         {
-            return "SELECT CANCELAR_PRESTAMO(" + pIdPrestamo.getId() + ", '" + pFecha.ToShortDateString() + "', '" + pCobro.getNombre() + "');";
+            script = "SELECT CANCELAR_PRESTAMO(" + pIdPrestamo.getId() + ", '" + pFecha.ToShortDateString() + "', '" + pCobro.getNombre() + "');";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
         }
 
         public static String select_one_prestamo_by_id(int pId)

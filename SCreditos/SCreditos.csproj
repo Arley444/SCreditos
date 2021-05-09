@@ -278,28 +278,30 @@
     <Compile Include="models\common\TipoPrestamo.cs" />
     <Compile Include="models\Domingo.cs" />
     <Compile Include="models\Gasto.cs" />
-    <Compile Include="repos\base\Conexion.cs" />
+    <Compile Include="repositorios\base\Conexion.cs" />
     <Compile Include="models\Contabilidad.cs" />
     <Compile Include="models\Prestamo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="models\Usuario.cs" />
-    <Compile Include="repos\repoabono\RepositoryAbono.cs" />
-    <Compile Include="repos\repoabono\ScriptAbono.cs" />
-    <Compile Include="repos\repocartera\RepositoryCartera.cs" />
-    <Compile Include="repos\repocartera\ScriptCartera.cs" />
-    <Compile Include="repos\repocliente\RepositoryCliente.cs" />
-    <Compile Include="repos\repocliente\ScriptCliente.cs" />
-    <Compile Include="repos\repocobro\RepositoryCobro.cs" />
-    <Compile Include="repos\repocobro\ScriptCobro.cs" />
-    <Compile Include="repos\repocontabilidad\RepositoryContabilidad.cs" />
-    <Compile Include="repos\repocontabilidad\ScriptContabilidad.cs" />
-    <Compile Include="repos\repodomingo\RepositoryDomingo.cs" />
-    <Compile Include="repos\repodomingo\ScriptDomingo.cs" />
-    <Compile Include="repos\repogasto\RepositoryGasto.cs" />
-    <Compile Include="repos\repogasto\ScriptGasto.cs" />
-    <Compile Include="repos\repoprestamo\RepositoryPrestamo.cs" />
-    <Compile Include="repos\repoprestamo\ScriptPrestamo.cs" />
+    <Compile Include="repositorios\repoabono\RepositoryAbono.cs" />
+    <Compile Include="repositorios\repoabono\ScriptAbono.cs" />
+    <Compile Include="repositorios\repocartera\RepositoryCartera.cs" />
+    <Compile Include="repositorios\repocartera\ScriptCartera.cs" />
+    <Compile Include="repositorios\repocliente\RepositoryCliente.cs" />
+    <Compile Include="repositorios\repocliente\ScriptCliente.cs" />
+    <Compile Include="repositorios\repocobro\RepositoryCobro.cs" />
+    <Compile Include="repositorios\repocobro\ScriptCobro.cs" />
+    <Compile Include="repositorios\repocontabilidad\RepositoryContabilidad.cs" />
+    <Compile Include="repositorios\repocontabilidad\ScriptContabilidad.cs" />
+    <Compile Include="repositorios\repodomingo\RepositoryDomingo.cs" />
+    <Compile Include="repositorios\repodomingo\ScriptDomingo.cs" />
+    <Compile Include="repositorios\repogasto\RepositoryGasto.cs" />
+    <Compile Include="repositorios\repogasto\ScriptGasto.cs" />
+    <Compile Include="repositorios\repootrosgastos\RepositoryOtrosGastos.cs" />
+    <Compile Include="repositorios\repootrosgastos\ScriptOtroGasto.cs" />
+    <Compile Include="repositorios\repoprestamo\RepositoryPrestamo.cs" />
+    <Compile Include="repositorios\repoprestamo\ScriptPrestamo.cs" />
     <Compile Include="usecase\abono\CargarPagoAbonoUseCase.cs" />
     <Compile Include="usecase\backup\CrearCopiaBaseDatosUseCase.cs" />
     <Compile Include="usecase\cartera\ConsultarCarterasUseCase.cs" />
@@ -310,7 +312,8 @@
     <Compile Include="usecase\contabilidad\CargarContabilidadesUseCase.cs" />
     <Compile Include="usecase\contabilidad\ConsultarContabilidadesFechaCobro.cs" />
     <Compile Include="usecase\contabilidad\ExisteContabilidadEnLaFecha.cs" />
-    <Compile Include="usecase\gasto\GuardarGastoDiario.cs" />
+    <Compile Include="usecase\gasto\AgregarOtroGastoUseCase.cs" />
+    <Compile Include="usecase\gasto\GuardarGastoDiarioUseCase.cs" />
     <Compile Include="usecase\prestamo\CalificarPrestamoUseCase.cs" />
     <Compile Include="usecase\prestamo\CancelarTotalidadPrestamoUseCase.cs" />
     <Compile Include="usecase\prestamo\CrearNuevoPrestamoUseCase.cs" />
@@ -332,6 +335,12 @@
     </Compile>
     <Compile Include="views\dialogs\CambiarContrasenna.Designer.cs">
       <DependentUpon>CambiarContrasenna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\CargarCarteraView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\CargarCarteraView.Designer.cs">
+      <DependentUpon>CargarCarteraView.cs</DependentUpon>
     </Compile>
     <Compile Include="views\dialogs\CargarDomingos.cs">
       <SubType>Form</SubType>
@@ -393,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\CambiarContrasenna.resx">
       <DependentUpon>CambiarContrasenna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\CargarCarteraView.resx">
+      <DependentUpon>CargarCarteraView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\CargarDomingos.resx">
       <DependentUpon>CargarDomingos.cs</DependentUpon>

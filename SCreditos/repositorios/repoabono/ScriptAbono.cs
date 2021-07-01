@@ -28,5 +28,32 @@ namespace SCreditos.repos.repoabono
 
             return script;
         }
+
+        public static String aumentar_valor_restante_abono(Abono abono, double valorAumentar)
+        {
+            script = "SELECT AUMENTAR_RESTANTE_ABONO(" + abono.getId() + ", " + valorAumentar + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String eliminar_abono(Abono abono, Prestamo prestamo, Contabilidad contabilidad)
+        {
+            script = "SELECT ELIMINAR_ABONO(" + prestamo.getId() + ", " + abono.getId() + ", " + contabilidad.getId() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String eliminar_abonos(Prestamo prestamo)
+        {
+            script = "SELECT ELIMINAR_ABONOS(" + prestamo.getId() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
     }
 }

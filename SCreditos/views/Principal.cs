@@ -13,6 +13,7 @@ using SCreditos.models.common;
 using SCreditos.usecase.gasto;
 using SCreditos.usecase.cartera;
 using SCreditos.usecase.cliente;
+using SCreditos.usecase.domingo;
 
 namespace SCreditos.views
 {
@@ -1251,7 +1252,124 @@ namespace SCreditos.views
 
                     MessageBox.Show("Se actualizo la ruta del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
 
+        private void editarCedula()
+        {
+            if (!ObjectUtils.isNullOVacio(txtCedula.Text))
+            {
+                EditarCedulaClienteView editarCedulaClienteView = new EditarCedulaClienteView(txtCedula.Text);
+                editarCedulaClienteView.ShowDialog();
+
+                if (!ObjectUtils.isNull(editarCedulaClienteView.getCobro()))
+                {
+                    cobroActual = editarCedulaClienteView.getCobro() as Cobro;
+
+                    listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    prestamoActual = clienteActual.getPrestamos()[0];
+
+                    cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                    cargarPanelDescripcion(prestamoActual);
+                    cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    cargarPanelPrestamo(prestamoActual);
+                    cargarPanelTablas(cobroActual);
+
+                    MessageBox.Show("Se actualizo la ruta del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void eliminarPrestamo()
+        {
+            if (formularioCrearNuevoClienteValido())
+            {
+                Contabilidad contabilidad = listaContabilidades.Find(c =>
+                    c.getFecha().Year.Equals(prestamoActual.getFechaInicio().Year)
+                    && c.getFecha().Month.Equals(prestamoActual.getFechaInicio().Month)
+                    && c.getFecha().Day.Equals(prestamoActual.getFechaInicio().Day)
+                    && c.getNombreCobro().Equals(cobroActual.getNombre()));
+
+                if (contabilidad.getEstado().Equals(TipoEstados.NO_GUARDADO))
+                {
+                    if (prestamoActual.getEstado().Equals(TipoEstados.PAGO))
+                    {
+                        MessageBox.Show("El prestamo ya se pago, no se puede eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // UseCase.
+                        if(clienteActual.getPrestamos().Count == 1)
+                        {
+                            //Se elimina cliente y prestamo
+                            if (MessageBox.Show("Realmente deseas eliminar el prestamo.", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                if (!ListValidators.validarListaVaciaONula(prestamoActual.getAbonos()))
+                                {
+                                    listaContabilidades = RestarAbonosDeContabilidadesUseCase.restarAbonosAContabilidades(prestamoActual.getAbonos(), listaContabilidades.FindAll(c => c.getNombreCobro().Equals(cobroActual.getNombre())));
+                                }
+
+                                listaContabilidades = RestarCobroUtilidadContabilidadUseCase.restarAbonosAContabilidades(contabilidad, prestamoActual);
+                                Cobro cobro = EliminarAbonosUseCase.eliminarAbonos(cobroActual.getNombre(), prestamoActual);
+                                cobro = EliminarDomingoUseCase.eliminarDomingo(cobroActual.getNombre(), prestamoActual);
+                                cobro = EliminarPrestamoUseCase.eliminarPrestamo(cobroActual.getNombre(), prestamoActual);
+
+                                cobroActual = EliminarClienteUseCase.eliminarCliente(cobroActual.getNombre(), clienteActual, cobroActual.getClientes().Find(cliente => cliente.getRuta() == cobroActual.getClientes().Count).getRuta());
+                                listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                                clienteActual = cobroActual.getClientes().Find(cli => cli.getRuta() == 1);
+
+                                listaPrestamosActuales = clienteActual.getPrestamos();
+                                prestamoActual = listaPrestamosActuales[0];
+
+                                MessageBox.Show("Se elimino exitosamente el prestamo.", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                cargarPanelDescripcion(prestamoActual);
+                                cargarPanelTablas(cobroActual);
+                                cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+
+                                cargarContabilidadoByFecha();
+                            }
+                        }
+                        else
+                        {
+                            //Se elimina prestamo   
+                            if (MessageBox.Show("Realmente deseas eliminar el prestamo.", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                if (!ListValidators.validarListaVaciaONula(prestamoActual.getAbonos()))
+                                {
+                                    listaContabilidades = RestarAbonosDeContabilidadesUseCase.restarAbonosAContabilidades(prestamoActual.getAbonos(), listaContabilidades.FindAll(c => c.getNombreCobro().Equals(cobroActual.getNombre())));
+                                }                                
+
+                                listaContabilidades = RestarCobroUtilidadContabilidadUseCase.restarAbonosAContabilidades(contabilidad, prestamoActual);
+                                Cobro cobro = EliminarAbonosUseCase.eliminarAbonos(cobroActual.getNombre(), prestamoActual);
+                                cobro = EliminarDomingoUseCase.eliminarDomingo(cobroActual.getNombre(), prestamoActual);
+
+                                cobroActual = EliminarPrestamoUseCase.eliminarPrestamo(cobroActual.getNombre(), prestamoActual);
+                                listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                                clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+
+                                listaPrestamosActuales = clienteActual.getPrestamos();
+                                prestamoActual = listaPrestamosActuales[0];
+
+                                MessageBox.Show("Se elimino exitosamente el prestamo.", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                cargarPanelDescripcion(prestamoActual);
+                                cargarPanelTablas(cobroActual);
+                                cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+
+                                cargarContabilidadoByFecha();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("La contabilidad de este prestamo ya fue guardada, no se puede eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1608,6 +1726,113 @@ namespace SCreditos.views
         private void btnEditarRuta_Click(object sender, EventArgs e)
         {
             cambiarRutaCliente();
+        }
+
+        private void btnEditarCedula_MouseEnter(object sender, EventArgs e)
+        {
+            btnEditarCedula.BackColor = System.Drawing.Color.Orange;
+        }
+
+        private void btnEditarCedula_MouseLeave(object sender, EventArgs e)
+        {
+            btnEditarCedula.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEditarNombre_MouseEnter(object sender, EventArgs e)
+        {
+            btnEditarNombre.BackColor = System.Drawing.Color.Orange;
+        }
+
+        private void btnEditarNombre_MouseLeave(object sender, EventArgs e)
+        {
+            btnEditarNombre.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEditarDireccion_MouseEnter(object sender, EventArgs e)
+        {
+            btnEditarDireccion.BackColor = System.Drawing.Color.Orange;
+        }
+
+        private void btnEditarDireccion_MouseLeave(object sender, EventArgs e)
+        {
+            btnEditarDireccion.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEditarTelefono_MouseEnter(object sender, EventArgs e)
+        {
+            btnEditarTelefono.BackColor = System.Drawing.Color.Orange;
+        }
+
+        private void btnEditarTelefono_MouseLeave(object sender, EventArgs e)
+        {
+            btnEditarTelefono.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEditarCedula_Click(object sender, EventArgs e)
+        {
+            editarCedula();
+        }
+
+        private void tablaDescripcion_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(!ObjectUtils.isNull(tablaDescripcion.CurrentRow.Cells["FECHA -> ABONO"].Value))
+            {
+                if (!tablaDescripcion.CurrentRow.Cells["TIPO"].Value.ToString().Equals("DOMINGOS"))
+                {
+                    DateTime fecha = Convert.ToDateTime(tablaDescripcion.CurrentRow.Cells["FECHA -> ABONO"].Value.ToString());
+
+                    Abono abono = prestamoActual.getAbonos().Find(a =>
+                                        a.getFecha().Year.Equals(fecha.Year)
+                                        && a.getFecha().Month.Equals(fecha.Month)
+                                        && a.getFecha().Day.Equals(fecha.Day)
+                                        && a.getTipoAbono().Equals(tablaDescripcion.CurrentRow.Cells["TIPO"].Value.ToString())
+                                        && a.getValor().Equals(Double.Parse(tablaDescripcion.CurrentRow.Cells["ABONO"].Value.ToString()))
+                                        && a.getRestante().Equals(Double.Parse(tablaDescripcion.CurrentRow.Cells["RESTA"].Value.ToString())));
+
+                    List<Object> abonos = new List<object>();
+                    prestamoActual.getAbonos().FindAll(a => a.getFecha() >= fecha && !a.getId().Equals(abono.getId()))
+                        .ForEach(ab => abonos.Add(ab as Object));
+
+                    Contabilidad contabilidad = listaContabilidades.Find(c =>
+                                        c.getFecha().Year.Equals(fecha.Year)
+                                        && c.getFecha().Month.Equals(fecha.Month)
+                                        && c.getFecha().Day.Equals(fecha.Day)
+                                        && c.getNombreCobro().Equals(cobroActual.getNombre()));
+
+                    EliminarAbonoView eliminarAbonoView = new EliminarAbonoView(cobroActual.getNombre(), abono, abonos, prestamoActual, contabilidad);
+                    eliminarAbonoView.ShowDialog();
+
+                    if (!ObjectUtils.isNull(eliminarAbonoView.getCobroActual()))
+                    {
+                        cobroActual = eliminarAbonoView.getCobroActual() as Cobro;
+                        listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                        clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+
+                        listaPrestamosActuales = clienteActual.getPrestamos();
+                        prestamoActual = listaPrestamosActuales[0];
+
+                        cargarPanelDescripcion(prestamoActual);
+                        cargarPanelTablas(cobroActual);
+                        cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    }
+                }
+            }
+        }
+
+        private void btnEliminarPrestamo_MouseEnter(object sender, EventArgs e)
+        {
+            btnEliminarPrestamo.BackColor = System.Drawing.Color.Red;
+        }
+
+        private void btnEliminarPrestamo_MouseLeave(object sender, EventArgs e)
+        {
+            btnEliminarPrestamo.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEliminarPrestamo_Click(object sender, EventArgs e)
+        {
+            eliminarPrestamo();
         }
     }
 }

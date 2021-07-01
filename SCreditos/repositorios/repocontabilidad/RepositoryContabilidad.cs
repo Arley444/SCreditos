@@ -161,5 +161,51 @@ namespace SCreditos.repos.repocontabilidad
 
             return null;
         }
+
+        public List<Contabilidad> restarAbonoContabilidad(List<Abono> abonos, List<Contabilidad> contabilidades)
+        {
+            try
+            {
+                abonos.ForEach(abono =>
+                {
+                    Contabilidad contabilidad = contabilidades.Find(contabilid =>
+                            contabilid.getFecha().Year.Equals(abono.getFecha().Year)
+                            && contabilid.getFecha().Month.Equals(abono.getFecha().Month)
+                            && contabilid.getFecha().Day.Equals(abono.getFecha().Day));
+
+                    Conexion.desconectar();
+                    command = new NpgsqlCommand(ScriptContabilidad.restar_abono_a_contabilidad(abono, contabilidad), Conexion.conexion);
+                    Conexion.conectar();
+                    command.ExecuteReader();
+                });
+
+                return findAllByCobro(contabilidades[0].getNombreCobro());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Restando Abonos a contabilidad.");
+            }
+
+            return null;
+        }
+
+        public List<Contabilidad> restarCobroUtilidadContabilidad(Contabilidad contabilidad, Prestamo prestamo)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptContabilidad.restar_cobro_utilidad_a_contabilidad(contabilidad, prestamo), Conexion.conexion);
+                Conexion.conectar();
+                consulta = command.ExecuteReader();
+
+                return findAllByCobro(contabilidad.getNombreCobro());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Restando Cobro Utilidad a contabilidad.");
+            }
+
+            return null;
+        }
     }
 }

@@ -118,5 +118,142 @@ namespace SCreditos.repos.repocliente
             return null;
         }
 
+        public Boolean existeCliente(String pCedula)
+        {
+            try
+            {
+                Conexion.desconectar();
+                Conexion.conectar();
+                command = new NpgsqlCommand(ScriptCliente.existe_cliente(pCedula), Conexion.conexion);
+                command.ExecuteReader();
+
+                consulta.Read();
+                if (consulta.GetInt32(0) == 0)
+                {
+                    return false;
+                }
+
+                return true;
+
+                Conexion.desconectar();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Existe Cliente");
+            }
+            return false;
+        }
+
+        public Cobro editarCedula(String pCedula, String pId, String pCobro)
+        {
+            try
+            {
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_cedula_cliente(pCedula, pId), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Editar cedula cliente");
+            }
+            return null;
+        }
+
+        public Cobro editarNombre(String pNombre, String pId, String pCobro)
+        {
+            try
+            {
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_nombre_cliente(pNombre, pId), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Editar nombre cliente");
+            }
+            return null;
+        }
+
+        public Cobro editarDireccion(String pDireccion, String pId, String pCobro)
+        {
+            try
+            {
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_direccion_cliente(pDireccion, pId), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Editar direccion cliente");
+            }
+            return null;
+        }
+
+        public Cobro editarTelefono(String pTelefono, String pId, String pCobro)
+        {
+            try
+            {
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_telefono_cliente(pTelefono, pId), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Editar telefono cliente");
+            }
+            return null;
+        }
+
+        public Cobro eliminarCliente(String pCobro, Cliente pCliente, int pRuta)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptCliente.editar_ruta_cliente(pCliente.getCedula(), pCliente.getCobro(), "DESPUES", pRuta), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptCliente.eliminar_cliente(pCliente), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Eliminando Cliente");
+            }
+            return null;
+        }
     }
 }

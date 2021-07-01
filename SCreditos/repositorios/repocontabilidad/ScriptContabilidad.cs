@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCreditos.models;
+using System;
 
 namespace SCreditos.repos.repocontabilidad
 {
@@ -45,6 +46,24 @@ namespace SCreditos.repos.repocontabilidad
         public static String select_by_Id(int pId)
         {
             script = "SELECT * FROM CONTABILIDADES WHERE ID= " + pId + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String restar_abono_a_contabilidad(Abono abono, Contabilidad contabilidad)
+        {
+            script = "SELECT RESTAR_ABONO_A_CONTABILIDAD(" + contabilidad.getId()  + ", " + abono.getValor() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String restar_cobro_utilidad_a_contabilidad(Contabilidad contabilidad, Prestamo prestamo)
+        {
+            script = "SELECT RESTAR_COBRO_UTILIDAD_Y_TARJETA_DE_CONTABILIDAD(" + contabilidad.getId() + ", " + prestamo.getPrestamo() + ", " + prestamo.getInteres() + ");";
 
             Console.WriteLine("SQL: " + script);
 

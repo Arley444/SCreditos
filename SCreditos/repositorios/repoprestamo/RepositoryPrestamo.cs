@@ -258,5 +258,26 @@ namespace SCreditos.repos.repoprestamo
 
             return null;
         }
+
+        public Cobro eliminarPrestamo(String cobro, Prestamo prestamo)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptPrestamo.eliminar_prestamo(prestamo), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+
+                repositoryCobro = new RepositoryCobro();
+
+                return repositoryCobro.findByNombre(cobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Eliminar prestamo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
+        }
     }
 }

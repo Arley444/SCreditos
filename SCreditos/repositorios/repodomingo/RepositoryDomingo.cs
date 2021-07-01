@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using SCreditos.models;
+using SCreditos.repos.repocobro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,20 @@ namespace SCreditos.repos.repodomingo
     {
         private Conexion conexion;
 
+        private NpgsqlCommand command;
+
+        private NpgsqlDataReader consulta;
+
+        private RepositoryCobro repositoryCobro;
+
         public Domingo findByIdPrestamo(int pIdPrestamo)
         {
             try
             {
                 Conexion.desconectar();
-                NpgsqlCommand command = new NpgsqlCommand(ScriptDomingo.select_one_domingo_by_id_prestamo(pIdPrestamo), Conexion.conexion);
+                command = new NpgsqlCommand(ScriptDomingo.select_one_domingo_by_id_prestamo(pIdPrestamo), Conexion.conexion);
                 Conexion.conectar();
-                NpgsqlDataReader consulta = command.ExecuteReader();
+                consulta = command.ExecuteReader();
 
                 if (consulta.HasRows)
                 {
@@ -33,6 +40,26 @@ namespace SCreditos.repos.repodomingo
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Consulta: Buscar domingo por id de prestamo");
+            }
+
+            return null;
+        }
+
+        public Cobro eliminarDomingo(string cobro, Prestamo prestamo)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptDomingo.eliminar_domingo(prestamo), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(cobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: eliminar domingo cliente");
             }
 
             return null;

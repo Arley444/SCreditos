@@ -52,7 +52,7 @@ namespace SCreditos.repos.repoabono
             return null;
         }
 
-        internal Cobro pagarAbono(Cliente cliente, Abono abono, Prestamo prestamo)
+        public Cobro pagarAbono(Cliente cliente, Abono abono, Prestamo prestamo)
         {
             try
             {
@@ -70,6 +70,69 @@ namespace SCreditos.repos.repoabono
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Consulta: Pagar abono cliente");
+            }
+
+            return null;
+        }
+
+        public Cobro aumentarAbonos(String cobro, List<Abono> abonos, Double valorAumentar)
+        {
+            try
+            {
+                abonos.ForEach(abono =>
+                {
+                    Conexion.desconectar();
+                    command = new NpgsqlCommand(ScriptAbono.aumentar_valor_restante_abono(abono, valorAumentar), Conexion.conexion);
+                    Conexion.conectar();
+                    command.ExecuteReader();
+                });
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(cobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: aumentar valor restante abono cliente");
+            }
+
+            return null;
+        }
+
+        public Cobro eliminarAbono(String cobro, Abono abono, Prestamo prestamo, Contabilidad contabilidad)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptAbono.eliminar_abono(abono, prestamo, contabilidad), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(cobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: eliminar abono cliente");
+            }
+
+            return null;
+        }
+
+        public Cobro eliminarAbonos(String cobro, Prestamo prestamo)
+        {
+            try
+            {
+                Conexion.desconectar();
+                command = new NpgsqlCommand(ScriptAbono.eliminar_abonos( prestamo), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+
+                repositoryCobro = new RepositoryCobro();
+                return repositoryCobro.findByNombre(cobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: eliminar abonos cliente");
             }
 
             return null;

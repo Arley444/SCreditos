@@ -45,5 +45,14 @@ namespace SCreditos.repos.repoprestamo
         {
             return "SELECT ENVIAR_CLAVO("+ prestamo.getId() +", '"+ cobro.getNombre() +"'" + ", '" + fecha.ToShortDateString() + "');";
         }
+
+        public static String eliminar_prestamo(Prestamo prestamo)
+        {
+            script = "SELECT ELIMINAR_PRESTAMO(" + prestamo.getId() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
     }
 }

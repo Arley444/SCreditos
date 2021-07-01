@@ -1,14 +1,21 @@
 ﻿using SCreditos.models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SCreditos.repos.repodomingo
 {
     class ScriptDomingo
     {
+        private static String script;
+
+        public static String eliminar_domingo(Prestamo prestamo)
+        {
+            script = "SELECT ELIMINAR_DOMINGOS(" + prestamo.getId() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
         public static String select_one_domingo_by_id_prestamo(int pIdPrestamo)
         {
             return "SELECT * FROM DOMINGOS WHERE ID_PRESTAMO= '" + pIdPrestamo + "';";

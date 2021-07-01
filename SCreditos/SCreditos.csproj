@@ -302,21 +302,31 @@
     <Compile Include="repositorios\repootrosgastos\ScriptOtroGasto.cs" />
     <Compile Include="repositorios\repoprestamo\RepositoryPrestamo.cs" />
     <Compile Include="repositorios\repoprestamo\ScriptPrestamo.cs" />
+    <Compile Include="usecase\abono\AumentarValorRestanteAbonoUseCase.cs" />
     <Compile Include="usecase\abono\CargarPagoAbonoUseCase.cs" />
+    <Compile Include="usecase\abono\EliminarAbonosUseCase.cs" />
+    <Compile Include="usecase\abono\EliminarAbonoUseCase.cs" />
     <Compile Include="usecase\backup\CrearCopiaBaseDatosUseCase.cs" />
     <Compile Include="usecase\cartera\ConsultarCarterasUseCase.cs" />
     <Compile Include="usecase\cliente\CrearNuevoClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\EditarCedulaClienteUseCase.cs" />
     <Compile Include="usecase\cliente\EditarRutaClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\EliminarClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\ExisteClienteUseCase.cs" />
     <Compile Include="usecase\cobro\CargarCobrosUseCase.cs" />
     <Compile Include="usecase\cobro\CrearNuevoCobroUseCase.cs" />
     <Compile Include="usecase\contabilidad\CargarContabilidadesUseCase.cs" />
     <Compile Include="usecase\contabilidad\ConsultarContabilidadesFechaCobro.cs" />
     <Compile Include="usecase\contabilidad\ExisteContabilidadEnLaFecha.cs" />
+    <Compile Include="usecase\contabilidad\RestarAbonosDeContabilidadesUseCase.cs" />
+    <Compile Include="usecase\contabilidad\RestarCobroUtilidadContabilidadUseCase.cs" />
+    <Compile Include="usecase\domingo\EliminarDomingoUseCase.cs" />
     <Compile Include="usecase\gasto\AgregarOtroGastoUseCase.cs" />
     <Compile Include="usecase\gasto\GuardarGastoDiarioUseCase.cs" />
     <Compile Include="usecase\prestamo\CalificarPrestamoUseCase.cs" />
     <Compile Include="usecase\prestamo\CancelarTotalidadPrestamoUseCase.cs" />
     <Compile Include="usecase\prestamo\CrearNuevoPrestamoUseCase.cs" />
+    <Compile Include="usecase\prestamo\EliminarPrestamoUseCase.cs" />
     <Compile Include="usecase\prestamo\EnviarClavoUseCase.cs" />
     <Compile Include="views\dialogs\AgregarGastoContabilidad.cs">
       <SubType>Form</SubType>
@@ -366,11 +376,23 @@
     <Compile Include="views\dialogs\CrearNuevoCobro.Designer.cs">
       <DependentUpon>CrearNuevoCobro.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\dialogs\EditarCedulaClienteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\EditarCedulaClienteView.Designer.cs">
+      <DependentUpon>EditarCedulaClienteView.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\dialogs\EditarRutaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="views\dialogs\EditarRutaCliente.Designer.cs">
       <DependentUpon>EditarRutaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\EliminarAbonoView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\EliminarAbonoView.Designer.cs">
+      <DependentUpon>EliminarAbonoView.cs</DependentUpon>
     </Compile>
     <Compile Include="views\Login.cs">
       <SubType>Form</SubType>
@@ -418,8 +440,14 @@
     <EmbeddedResource Include="views\dialogs\CrearNuevoCobro.resx">
       <DependentUpon>CrearNuevoCobro.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\EditarCedulaClienteView.resx">
+      <DependentUpon>EditarCedulaClienteView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\EditarRutaCliente.resx">
       <DependentUpon>EditarRutaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\EliminarAbonoView.resx">
+      <DependentUpon>EliminarAbonoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -448,6 +476,8 @@
     <None Include="recursos\login.png" />
     <None Include="recursos\aaaaa.jpg" />
     <Content Include="monitorcashcreditcard_101090.ico" />
+    <None Include="recursos\documento.png" />
+    <Content Include="recursos\editar.png" />
     <Content Include="utilidades\aaaaa.jpg" />
     <Content Include="utilidades\accept.png" />
     <Content Include="utilidades\cancel.png" />

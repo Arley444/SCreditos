@@ -12,5 +12,10 @@ namespace SCreditos.factory
         {
             return o == null;
         }
+
+        public static Boolean isNullOVacio(String o)
+        {
+            return o == null || o.Equals("");
+        }
     }
 }

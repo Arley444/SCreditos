@@ -57,5 +57,71 @@ namespace SCreditos.repos.repocliente
 
             return script;
         }
+
+        public static String editar_nombre_cliente(String pNombreCliente, String pIdCliente)
+        {
+            Console.WriteLine("UPDATE CLIENTES SET NOMBRE = " + pNombreCliente + " WHERE ID = " + pIdCliente + ";");
+
+            script = "UPDATE CLIENTES SET NOMBRE = " + pNombreCliente + " WHERE ID = " + pIdCliente + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String editar_direccion_cliente(String pDireccion, String pIdCliente)
+        {
+            Console.WriteLine("UPDATE CLIENTES SET DIRECCION = " + pDireccion + " WHERE ID = " + pIdCliente + ";");
+
+            script = "UPDATE CLIENTES SET DIRECCION = " + pDireccion + " WHERE ID = " + pIdCliente + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String editar_telefono_cliente(String pTelefono, String pIdCliente)
+        {
+            Console.WriteLine("UPDATE CLIENTES SET TELEFONO = " + pTelefono + " WHERE ID = " + pIdCliente + ";");
+
+            script = "UPDATE CLIENTES SET TELEFONO = " + pTelefono + " WHERE ID = " + pIdCliente + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String editar_cedula_cliente(String pCedula, String pIdCliente)
+        {
+            Console.WriteLine("UPDATE CLIENTES SET CEDULA = " + pCedula + " WHERE ID = " + pIdCliente + ";");
+
+            script = "UPDATE CLIENTES SET CEDULA = " + pCedula + " WHERE ID = " + pIdCliente + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String existe_cliente(String pCedula)
+        {
+            Console.WriteLine("SELECT * FROM EXISTE_CLIENTE('" + pCedula + "');");
+
+            script = "SELECT * FROM EXISTE_CLIENTE('" + pCedula + "');";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String eliminar_cliente(Cliente pCliente)
+        {
+            Console.WriteLine("SELECT ELIMINAR_CLIENTE('" + pCliente.getCedula() + "');");
+
+            script = "SELECT ELIMINAR_CLIENTE('" + pCliente.getCedula() + "');";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
     }
 }

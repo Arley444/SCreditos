@@ -70,12 +70,39 @@ namespace SCreditos.views.dialogs
                 }
                 else
                 {
-                    if (MessageBox.Show("¿Realmente deseas cargar el abono. \nVALOR: " + txtValorAbono.Text.Trim() + "" +
-                        "\nFECHA DE PAGO: "+ dpkFecha.Value.ToShortDateString() +"?", "CONFIRMACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (ListValidators.validarListaVaciaONula(prestamo.getAbonos()))
                     {
-                        abono = new Abono(0, prestamo.getId(), new DateTime(dpkFecha.Value.Year, dpkFecha.Value.Month, dpkFecha.Value.Day), Convert.ToDouble(txtValorAbono.Text.Trim()), 0);
-                        pago = true;
-                        this.Dispose();
+                        if (dpkFecha.Value < prestamo.getFechaInicio())
+                        {
+                            MessageBox.Show("No puedes cargar abonos con fecha inferior al ultimo.", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("¿Realmente deseas cargar el abono. \nVALOR: " + txtValorAbono.Text.Trim() + "" +
+                             "\nFECHA DE PAGO: " + dpkFecha.Value.ToShortDateString() + "?", "CONFIRMACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                abono = new Abono(0, prestamo.getId(), new DateTime(dpkFecha.Value.Year, dpkFecha.Value.Month, dpkFecha.Value.Day), Convert.ToDouble(txtValorAbono.Text.Trim()), 0);
+                                pago = true;
+                                this.Dispose();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (dpkFecha.Value < prestamo.getAbonos()[prestamo.getAbonos().Count - 1].getFecha())
+                        {
+                            MessageBox.Show("No puedes cargar abonos con fecha inferior al ultimo.", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("¿Realmente deseas cargar el abono. \nVALOR: " + txtValorAbono.Text.Trim() + "" +
+                             "\nFECHA DE PAGO: " + dpkFecha.Value.ToShortDateString() + "?", "CONFIRMACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                abono = new Abono(0, prestamo.getId(), new DateTime(dpkFecha.Value.Year, dpkFecha.Value.Month, dpkFecha.Value.Day), Convert.ToDouble(txtValorAbono.Text.Trim()), 0);
+                                pago = true;
+                                this.Dispose();
+                            }
+                        }
                     }
                 }
             }

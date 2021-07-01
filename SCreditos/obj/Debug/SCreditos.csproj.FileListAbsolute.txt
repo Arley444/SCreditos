@@ -195,3 +195,5 @@ D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.Agregar
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.AgregarGastoDiario.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarRutaCliente.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.CargarCarteraView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarCedulaClienteView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EliminarAbonoView.resources

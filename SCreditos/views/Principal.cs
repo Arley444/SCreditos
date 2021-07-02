@@ -900,7 +900,7 @@ namespace SCreditos.views
                         clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
 
                         listaPrestamosActuales = clienteActual.getPrestamos();
-                        prestamoActual = listaPrestamosActuales[0];
+                        prestamoActual = listaPrestamosActuales.Find(p => p.getId() == prestamoActual.getId());
 
                         cargarPanelDescripcion(prestamoActual);
                         cargarPanelTablas(cobroActual);

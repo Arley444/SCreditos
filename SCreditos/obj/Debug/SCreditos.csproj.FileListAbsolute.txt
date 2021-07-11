@@ -197,3 +197,6 @@ D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarR
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.CargarCarteraView.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarCedulaClienteView.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EliminarAbonoView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarTelefonoClienteView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarDireccionClienteView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarNombreClienteView.resources

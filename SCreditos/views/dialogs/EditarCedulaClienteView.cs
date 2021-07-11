@@ -2,13 +2,6 @@
 using SCreditos.models;
 using SCreditos.usecase.cliente;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SCreditos.views.dialogs
@@ -16,13 +9,15 @@ namespace SCreditos.views.dialogs
     public partial class EditarCedulaClienteView : Form
     {
         private String cedulaActual;
-        private String id;
+        private int id;
         private String cobroDelcliente;
         private Cobro cobro;
 
-        public EditarCedulaClienteView(String pCedula)
+        public EditarCedulaClienteView(String pCedula, int pId, String pCobro)
         {
-            cedulaActual = pCedula;
+            this.id = pId;
+            this.cedulaActual = pCedula;
+            this.cobroDelcliente = pCobro;
             InitializeComponent();
             txtCedula.Text = pCedula;
         }
@@ -44,7 +39,7 @@ namespace SCreditos.views.dialogs
                     }
                     else
                     {
-                        cobro = EditarCedulaClienteUseCase.editarCedulaCliente(txtCedula.Text.Trim(), id, cobroDelcliente);
+                        cobro = EditarCedulaClienteUseCase.editarCedulaCliente(txtCedula.Text.Trim(), id, cobroDelcliente, cedulaActual);
                         this.Dispose();
                     }
                 }

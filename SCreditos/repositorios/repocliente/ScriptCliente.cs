@@ -58,29 +58,29 @@ namespace SCreditos.repos.repocliente
             return script;
         }
 
-        public static String editar_nombre_cliente(String pNombreCliente, String pIdCliente)
+        public static String editar_nombre_cliente(String pNombreCliente, int pIdCliente)
         {
-            Console.WriteLine("UPDATE CLIENTES SET NOMBRE = " + pNombreCliente + " WHERE ID = " + pIdCliente + ";");
+            Console.WriteLine("UPDATE CLIENTES SET NOMBRE = '" + pNombreCliente + "' WHERE ID = " + pIdCliente + ";");
 
-            script = "UPDATE CLIENTES SET NOMBRE = " + pNombreCliente + " WHERE ID = " + pIdCliente + ";";
+            script = "UPDATE CLIENTES SET NOMBRE = '" + pNombreCliente + "' WHERE ID = " + pIdCliente + ";";
 
             Console.WriteLine("SQL: " + script);
 
             return script;
         }
 
-        public static String editar_direccion_cliente(String pDireccion, String pIdCliente)
+        public static String editar_direccion_cliente(String pDireccion, int pIdCliente)
         {
-            Console.WriteLine("UPDATE CLIENTES SET DIRECCION = " + pDireccion + " WHERE ID = " + pIdCliente + ";");
+            Console.WriteLine("UPDATE CLIENTES SET DIRECCION = '" + pDireccion + "' WHERE ID = " + pIdCliente + ";");
 
-            script = "UPDATE CLIENTES SET DIRECCION = " + pDireccion + " WHERE ID = " + pIdCliente + ";";
+            script = "UPDATE CLIENTES SET DIRECCION = '" + pDireccion + "' WHERE ID = " + pIdCliente + ";";
 
             Console.WriteLine("SQL: " + script);
 
             return script;
         }
 
-        public static String editar_telefono_cliente(String pTelefono, String pIdCliente)
+        public static String editar_telefono_cliente(String pTelefono, int pIdCliente)
         {
             Console.WriteLine("UPDATE CLIENTES SET TELEFONO = " + pTelefono + " WHERE ID = " + pIdCliente + ";");
 
@@ -91,11 +91,22 @@ namespace SCreditos.repos.repocliente
             return script;
         }
 
-        public static String editar_cedula_cliente(String pCedula, String pIdCliente)
+        public static String editar_cedula_cliente(String pCedula, int pIdCliente)
         {
             Console.WriteLine("UPDATE CLIENTES SET CEDULA = " + pCedula + " WHERE ID = " + pIdCliente + ";");
 
-            script = "UPDATE CLIENTES SET CEDULA = " + pCedula + " WHERE ID = " + pIdCliente + ";";
+            script = "UPDATE CLIENTES SET CEDULA = '" + pCedula + "' WHERE ID = " + pIdCliente + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String editar_cedula_cliente_prestamos(String pCedula, String pCedulaAnterior)
+        {
+            Console.WriteLine("UPDATE PRESTAMOS SET CEDULA_CLIENTE = '" + pCedula + "' WHERE CEDULA_CLIENTE = '" + pCedulaAnterior + "';");
+
+            script = "UPDATE PRESTAMOS SET CEDULA_CLIENTE = '" + pCedula + "' WHERE CEDULA_CLIENTE = '" + pCedulaAnterior + "';";
 
             Console.WriteLine("SQL: " + script);
 
@@ -104,9 +115,9 @@ namespace SCreditos.repos.repocliente
 
         public static String existe_cliente(String pCedula)
         {
-            Console.WriteLine("SELECT * FROM EXISTE_CLIENTE('" + pCedula + "');");
+            Console.WriteLine("SELECT * FROM CLIENTES WHERE CEDULA = '" + pCedula + "';");
 
-            script = "SELECT * FROM EXISTE_CLIENTE('" + pCedula + "');";
+            script = "SELECT * FROM CLIENTES WHERE CEDULA = '" + pCedula + "';";
 
             Console.WriteLine("SQL: " + script);
 

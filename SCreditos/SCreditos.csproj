@@ -310,7 +310,10 @@
     <Compile Include="usecase\cartera\ConsultarCarterasUseCase.cs" />
     <Compile Include="usecase\cliente\CrearNuevoClienteUseCase.cs" />
     <Compile Include="usecase\cliente\EditarCedulaClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\EditarDireccionClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\EditarNombreClienteUseCase.cs" />
     <Compile Include="usecase\cliente\EditarRutaClienteUseCase.cs" />
+    <Compile Include="usecase\cliente\EditarTelefonoClienteUseCase.cs" />
     <Compile Include="usecase\cliente\EliminarClienteUseCase.cs" />
     <Compile Include="usecase\cliente\ExisteClienteUseCase.cs" />
     <Compile Include="usecase\cobro\CargarCobrosUseCase.cs" />
@@ -382,11 +385,29 @@
     <Compile Include="views\dialogs\EditarCedulaClienteView.Designer.cs">
       <DependentUpon>EditarCedulaClienteView.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\dialogs\EditarDireccionClienteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\EditarDireccionClienteView.Designer.cs">
+      <DependentUpon>EditarDireccionClienteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\EditarNombreClienteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\EditarNombreClienteView.Designer.cs">
+      <DependentUpon>EditarNombreClienteView.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\dialogs\EditarRutaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="views\dialogs\EditarRutaCliente.Designer.cs">
       <DependentUpon>EditarRutaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\EditarTelefonoClienteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\EditarTelefonoClienteView.Designer.cs">
+      <DependentUpon>EditarTelefonoClienteView.cs</DependentUpon>
     </Compile>
     <Compile Include="views\dialogs\EliminarAbonoView.cs">
       <SubType>Form</SubType>
@@ -443,8 +464,17 @@
     <EmbeddedResource Include="views\dialogs\EditarCedulaClienteView.resx">
       <DependentUpon>EditarCedulaClienteView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\EditarDireccionClienteView.resx">
+      <DependentUpon>EditarDireccionClienteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\EditarNombreClienteView.resx">
+      <DependentUpon>EditarNombreClienteView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\EditarRutaCliente.resx">
       <DependentUpon>EditarRutaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\EditarTelefonoClienteView.resx">
+      <DependentUpon>EditarTelefonoClienteView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\EliminarAbonoView.resx">
       <DependentUpon>EliminarAbonoView.cs</DependentUpon>

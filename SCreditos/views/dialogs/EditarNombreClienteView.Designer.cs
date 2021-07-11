@@ -1,6 +1,6 @@
 ﻿namespace SCreditos.views.dialogs
 {
-    partial class EditarCedulaClienteView
+    partial class EditarNombreClienteView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,58 +29,58 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnCambiarCedula = new System.Windows.Forms.Button();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblCapital = new System.Windows.Forms.Label();
-            this.txtCedula = new System.Windows.Forms.TextBox();
+            this.btnCambiarNombre = new System.Windows.Forms.Button();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnCambiarCedula
+            // txtNombre
             // 
-            this.btnCambiarCedula.Location = new System.Drawing.Point(69, 72);
-            this.btnCambiarCedula.Name = "btnCambiarCedula";
-            this.btnCambiarCedula.Size = new System.Drawing.Size(75, 23);
-            this.btnCambiarCedula.TabIndex = 15;
-            this.btnCambiarCedula.Text = "Cambiar";
-            this.btnCambiarCedula.UseVisualStyleBackColor = true;
-            this.btnCambiarCedula.Click += new System.EventHandler(this.btnCambiarCedula_Click);
+            this.txtNombre.Location = new System.Drawing.Point(97, 21);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 26;
             // 
             // lblCapital
             // 
             this.lblCapital.AutoSize = true;
             this.lblCapital.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCapital.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblCapital.Location = new System.Drawing.Point(30, 31);
+            this.lblCapital.Location = new System.Drawing.Point(31, 24);
             this.lblCapital.Name = "lblCapital";
-            this.lblCapital.Size = new System.Drawing.Size(50, 13);
-            this.lblCapital.TabIndex = 16;
-            this.lblCapital.Text = "Cedula:";
+            this.lblCapital.Size = new System.Drawing.Size(54, 13);
+            this.lblCapital.TabIndex = 25;
+            this.lblCapital.Text = "Nombre:";
             // 
-            // txtCedula
+            // btnCambiarNombre
             // 
-            this.txtCedula.Location = new System.Drawing.Point(86, 28);
-            this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(100, 20);
-            this.txtCedula.TabIndex = 17;
+            this.btnCambiarNombre.Location = new System.Drawing.Point(80, 65);
+            this.btnCambiarNombre.Name = "btnCambiarNombre";
+            this.btnCambiarNombre.Size = new System.Drawing.Size(75, 23);
+            this.btnCambiarNombre.TabIndex = 24;
+            this.btnCambiarNombre.Text = "Cambiar";
+            this.btnCambiarNombre.UseVisualStyleBackColor = true;
+            this.btnCambiarNombre.Click += new System.EventHandler(this.btnCambiarNombre_Click);
             // 
             // error
             // 
             this.error.ContainerControl = this;
             // 
-            // EditarCedulaClienteView
+            // EditarNombreClienteView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(228, 108);
-            this.Controls.Add(this.txtCedula);
+            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblCapital);
-            this.Controls.Add(this.btnCambiarCedula);
+            this.Controls.Add(this.btnCambiarNombre);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EditarCedulaClienteView";
+            this.Name = "EditarNombreClienteView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Editar Cedula ";
+            this.Text = "Editar Nombre";
             ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -89,9 +89,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCambiarCedula;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblCapital;
-        private System.Windows.Forms.TextBox txtCedula;
+        private System.Windows.Forms.Button btnCambiarNombre;
         private System.Windows.Forms.ErrorProvider error;
     }
 }

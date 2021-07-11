@@ -1257,9 +1257,9 @@ namespace SCreditos.views
 
         private void editarCedula()
         {
-            if (!ObjectUtils.isNullOVacio(txtCedula.Text))
+            if (formularioCrearNuevoClienteValido())
             {
-                EditarCedulaClienteView editarCedulaClienteView = new EditarCedulaClienteView(txtCedula.Text);
+                EditarCedulaClienteView editarCedulaClienteView = new EditarCedulaClienteView(txtCedula.Text, clienteActual.getId(), cobroActual.getNombre());
                 editarCedulaClienteView.ShowDialog();
 
                 if (!ObjectUtils.isNull(editarCedulaClienteView.getCobro()))
@@ -1268,7 +1268,7 @@ namespace SCreditos.views
 
                     listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
 
-                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getId().Equals(clienteActual.getId()));
                     prestamoActual = clienteActual.getPrestamos()[0];
 
                     cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
@@ -1277,7 +1277,7 @@ namespace SCreditos.views
                     cargarPanelPrestamo(prestamoActual);
                     cargarPanelTablas(cobroActual);
 
-                    MessageBox.Show("Se actualizo la ruta del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se actualizo la cedula del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1369,6 +1369,87 @@ namespace SCreditos.views
                 else
                 {
                     MessageBox.Show("La contabilidad de este prestamo ya fue guardada, no se puede eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void cambiarNumeroTelefono()
+        {
+            if (formularioCrearNuevoClienteValido())
+            {
+                EditarTelefonoClienteView editarTelefonoClienteView = new EditarTelefonoClienteView(txtTelefono.Text, clienteActual.getId(), cobroActual.getNombre());
+                editarTelefonoClienteView.ShowDialog();
+
+                if (!ObjectUtils.isNull(editarTelefonoClienteView.getCobro()))
+                {
+                    cobroActual = editarTelefonoClienteView.getCobro() as Cobro;
+
+                    listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    prestamoActual = clienteActual.getPrestamos()[0];
+
+                    cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                    cargarPanelDescripcion(prestamoActual);
+                    cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    cargarPanelPrestamo(prestamoActual);
+                    cargarPanelTablas(cobroActual);
+
+                    MessageBox.Show("Se actualizo el telefono del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void cambiarDireccionCliente()
+        {
+            if (formularioCrearNuevoClienteValido())
+            {
+                EditarDireccionClienteView editarDireccionClienteView = new EditarDireccionClienteView(txtDireccion.Text, clienteActual.getId(), cobroActual.getNombre());
+                editarDireccionClienteView.ShowDialog();
+
+                if (!ObjectUtils.isNull(editarDireccionClienteView.getCobro()))
+                {
+                    cobroActual = editarDireccionClienteView.getCobro() as Cobro;
+
+                    listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    prestamoActual = clienteActual.getPrestamos()[0];
+
+                    cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                    cargarPanelDescripcion(prestamoActual);
+                    cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    cargarPanelPrestamo(prestamoActual);
+                    cargarPanelTablas(cobroActual);
+
+                    MessageBox.Show("Se actualizo la direccion del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void cambiarNombreCliente()
+        {
+            if (formularioCrearNuevoClienteValido())
+            {
+                EditarNombreClienteView editarNombreClienteView = new EditarNombreClienteView(txtNombre.Text, clienteActual.getId(), cobroActual.getNombre());
+                editarNombreClienteView.ShowDialog();
+
+                if (!ObjectUtils.isNull(editarNombreClienteView.getCobro()))
+                {
+                    cobroActual = editarNombreClienteView.getCobro() as Cobro;
+
+                    listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                    clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                    prestamoActual = clienteActual.getPrestamos()[0];
+
+                    cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                    cargarPanelDescripcion(prestamoActual);
+                    cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                    cargarPanelPrestamo(prestamoActual);
+                    cargarPanelTablas(cobroActual);
+
+                    MessageBox.Show("Se actualizo el nombre del cliente.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1738,6 +1819,11 @@ namespace SCreditos.views
             btnEditarCedula.BackColor = System.Drawing.Color.Transparent;
         }
 
+        private void btnEditarNombre_Click(object sender, EventArgs e)
+        {
+            cambiarNombreCliente();
+        }
+
         private void btnEditarNombre_MouseEnter(object sender, EventArgs e)
         {
             btnEditarNombre.BackColor = System.Drawing.Color.Orange;
@@ -1748,6 +1834,11 @@ namespace SCreditos.views
             btnEditarNombre.BackColor = System.Drawing.Color.Transparent;
         }
 
+        private void btnEditarDireccion_Click(object sender, EventArgs e)
+        {
+            cambiarDireccionCliente();
+        }
+
         private void btnEditarDireccion_MouseEnter(object sender, EventArgs e)
         {
             btnEditarDireccion.BackColor = System.Drawing.Color.Orange;
@@ -1756,6 +1847,11 @@ namespace SCreditos.views
         private void btnEditarDireccion_MouseLeave(object sender, EventArgs e)
         {
             btnEditarDireccion.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void btnEditarTelefono_Click(object sender, EventArgs e)
+        {
+            cambiarNumeroTelefono();
         }
 
         private void btnEditarTelefono_MouseEnter(object sender, EventArgs e)

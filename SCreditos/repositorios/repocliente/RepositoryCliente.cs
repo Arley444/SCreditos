@@ -123,19 +123,11 @@ namespace SCreditos.repos.repocliente
             try
             {
                 Conexion.desconectar();
-                Conexion.conectar();
                 command = new NpgsqlCommand(ScriptCliente.existe_cliente(pCedula), Conexion.conexion);
-                command.ExecuteReader();
+                Conexion.conectar();
+                consulta = command.ExecuteReader();
 
-                consulta.Read();
-                if (consulta.GetInt32(0) == 0)
-                {
-                    return false;
-                }
-
-                return true;
-
-                Conexion.desconectar();
+                return consulta.HasRows;
             }
             catch (Exception e)
             {
@@ -144,13 +136,18 @@ namespace SCreditos.repos.repocliente
             return false;
         }
 
-        public Cobro editarCedula(String pCedula, String pId, String pCobro)
+        public Cobro editarCedula(String pCedula, int pId, String pCobro, String pCedulaAnterior)
         {
             try
             {
                 Conexion.desconectar();
 
                 command = new NpgsqlCommand(ScriptCliente.editar_cedula_cliente(pCedula, pId), Conexion.conexion);
+                Conexion.conectar();
+                command.ExecuteReader();
+                Conexion.desconectar();
+
+                command = new NpgsqlCommand(ScriptCliente.editar_cedula_cliente_prestamos(pCedula, pCedulaAnterior), Conexion.conexion);
                 Conexion.conectar();
                 command.ExecuteReader();
                 Conexion.desconectar();
@@ -165,7 +162,7 @@ namespace SCreditos.repos.repocliente
             return null;
         }
 
-        public Cobro editarNombre(String pNombre, String pId, String pCobro)
+        public Cobro editarNombre(String pNombre, int pId, String pCobro)
         {
             try
             {
@@ -186,7 +183,7 @@ namespace SCreditos.repos.repocliente
             return null;
         }
 
-        public Cobro editarDireccion(String pDireccion, String pId, String pCobro)
+        public Cobro editarDireccion(String pDireccion, int pId, String pCobro)
         {
             try
             {
@@ -207,7 +204,7 @@ namespace SCreditos.repos.repocliente
             return null;
         }
 
-        public Cobro editarTelefono(String pTelefono, String pId, String pCobro)
+        public Cobro editarTelefono(String pTelefono, int pId, String pCobro)
         {
             try
             {

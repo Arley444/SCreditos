@@ -6,9 +6,9 @@ namespace SCreditos.usecase.cliente
 {
     class EditarCedulaClienteUseCase
     {
-        public static Cobro editarCedulaCliente(String pCedula, String pIdCliente, String pCobro)
+        public static Cobro editarCedulaCliente(String pCedula, int pIdCliente, String pCobro, String pCedulaActual)
         {
-            return new RepositoryCliente().editarCedula(pCedula, pIdCliente, pCobro);
+            return new RepositoryCliente().editarCedula(pCedula, pIdCliente, pCobro, pCedulaActual);
         }
     }
 }

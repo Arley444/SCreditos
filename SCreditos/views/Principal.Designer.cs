@@ -59,10 +59,6 @@
             this.tablaPrestamosIngresados = new System.Windows.Forms.DataGridView();
             this.tablaPrestamosCancelados = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnEditarDireccion = new System.Windows.Forms.Label();
-            this.btnEditarTelefono = new System.Windows.Forms.Label();
-            this.btnEditarNombre = new System.Windows.Forms.Label();
-            this.btnEditarCedula = new System.Windows.Forms.Label();
             this.lblNumeroDePrestamos = new System.Windows.Forms.Label();
             this.cboPrestamos = new System.Windows.Forms.ComboBox();
             this.txtPlazo = new System.Windows.Forms.TextBox();
@@ -104,7 +100,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAgregarOtroGastoContabilidad = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnTirilla = new System.Windows.Forms.Button();
             this.txtContabilidadOtrosGastos = new System.Windows.Forms.TextBox();
@@ -131,7 +126,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnPasarAClavo = new System.Windows.Forms.Button();
             this.btnEditarRuta = new System.Windows.Forms.Button();
+            this.btnAgregarOtroGastoContabilidad = new System.Windows.Forms.Label();
             this.btnEliminarPrestamo = new System.Windows.Forms.Label();
+            this.btnEditarDireccion = new System.Windows.Forms.Label();
+            this.btnEditarTelefono = new System.Windows.Forms.Label();
+            this.btnEditarNombre = new System.Windows.Forms.Label();
+            this.btnEditarCedula = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -468,55 +468,6 @@
             this.groupBox3.Size = new System.Drawing.Size(692, 168);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            // 
-            // btnEditarDireccion
-            // 
-            this.btnEditarDireccion.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditarDireccion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarDireccion.Image = global::SCreditos.Properties.Resources.editar;
-            this.btnEditarDireccion.Location = new System.Drawing.Point(523, 63);
-            this.btnEditarDireccion.Name = "btnEditarDireccion";
-            this.btnEditarDireccion.Size = new System.Drawing.Size(16, 16);
-            this.btnEditarDireccion.TabIndex = 37;
-            this.btnEditarDireccion.MouseEnter += new System.EventHandler(this.btnEditarDireccion_MouseEnter);
-            this.btnEditarDireccion.MouseLeave += new System.EventHandler(this.btnEditarDireccion_MouseLeave);
-            // 
-            // btnEditarTelefono
-            // 
-            this.btnEditarTelefono.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditarTelefono.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarTelefono.Image = global::SCreditos.Properties.Resources.editar;
-            this.btnEditarTelefono.Location = new System.Drawing.Point(523, 98);
-            this.btnEditarTelefono.Name = "btnEditarTelefono";
-            this.btnEditarTelefono.Size = new System.Drawing.Size(16, 16);
-            this.btnEditarTelefono.TabIndex = 36;
-            this.btnEditarTelefono.MouseEnter += new System.EventHandler(this.btnEditarTelefono_MouseEnter);
-            this.btnEditarTelefono.MouseLeave += new System.EventHandler(this.btnEditarTelefono_MouseLeave);
-            // 
-            // btnEditarNombre
-            // 
-            this.btnEditarNombre.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditarNombre.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarNombre.Image = global::SCreditos.Properties.Resources.editar;
-            this.btnEditarNombre.Location = new System.Drawing.Point(258, 63);
-            this.btnEditarNombre.Name = "btnEditarNombre";
-            this.btnEditarNombre.Size = new System.Drawing.Size(16, 16);
-            this.btnEditarNombre.TabIndex = 35;
-            this.btnEditarNombre.MouseEnter += new System.EventHandler(this.btnEditarNombre_MouseEnter);
-            this.btnEditarNombre.MouseLeave += new System.EventHandler(this.btnEditarNombre_MouseLeave);
-            // 
-            // btnEditarCedula
-            // 
-            this.btnEditarCedula.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditarCedula.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditarCedula.Image = global::SCreditos.Properties.Resources.editar;
-            this.btnEditarCedula.Location = new System.Drawing.Point(54, 63);
-            this.btnEditarCedula.Name = "btnEditarCedula";
-            this.btnEditarCedula.Size = new System.Drawing.Size(16, 16);
-            this.btnEditarCedula.TabIndex = 30;
-            this.btnEditarCedula.Click += new System.EventHandler(this.btnEditarCedula_Click);
-            this.btnEditarCedula.MouseEnter += new System.EventHandler(this.btnEditarCedula_MouseEnter);
-            this.btnEditarCedula.MouseLeave += new System.EventHandler(this.btnEditarCedula_MouseLeave);
             // 
             // lblNumeroDePrestamos
             // 
@@ -931,19 +882,6 @@
             this.panel1.Size = new System.Drawing.Size(227, 275);
             this.panel1.TabIndex = 8;
             // 
-            // btnAgregarOtroGastoContabilidad
-            // 
-            this.btnAgregarOtroGastoContabilidad.BackColor = System.Drawing.Color.Transparent;
-            this.btnAgregarOtroGastoContabilidad.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAgregarOtroGastoContabilidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarOtroGastoContabilidad.Image")));
-            this.btnAgregarOtroGastoContabilidad.Location = new System.Drawing.Point(200, 66);
-            this.btnAgregarOtroGastoContabilidad.Name = "btnAgregarOtroGastoContabilidad";
-            this.btnAgregarOtroGastoContabilidad.Size = new System.Drawing.Size(16, 16);
-            this.btnAgregarOtroGastoContabilidad.TabIndex = 29;
-            this.btnAgregarOtroGastoContabilidad.Click += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_Click);
-            this.btnAgregarOtroGastoContabilidad.MouseEnter += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseEnter);
-            this.btnAgregarOtroGastoContabilidad.MouseLeave += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseLeave);
-            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(117, 203);
@@ -1178,6 +1116,19 @@
             this.btnEditarRuta.UseVisualStyleBackColor = false;
             this.btnEditarRuta.Click += new System.EventHandler(this.btnEditarRuta_Click);
             // 
+            // btnAgregarOtroGastoContabilidad
+            // 
+            this.btnAgregarOtroGastoContabilidad.BackColor = System.Drawing.Color.Transparent;
+            this.btnAgregarOtroGastoContabilidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarOtroGastoContabilidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarOtroGastoContabilidad.Image")));
+            this.btnAgregarOtroGastoContabilidad.Location = new System.Drawing.Point(200, 66);
+            this.btnAgregarOtroGastoContabilidad.Name = "btnAgregarOtroGastoContabilidad";
+            this.btnAgregarOtroGastoContabilidad.Size = new System.Drawing.Size(16, 16);
+            this.btnAgregarOtroGastoContabilidad.TabIndex = 29;
+            this.btnAgregarOtroGastoContabilidad.Click += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_Click);
+            this.btnAgregarOtroGastoContabilidad.MouseEnter += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseEnter);
+            this.btnAgregarOtroGastoContabilidad.MouseLeave += new System.EventHandler(this.btnAgregarOtroGastoContabilidad_MouseLeave);
+            // 
             // btnEliminarPrestamo
             // 
             this.btnEliminarPrestamo.BackColor = System.Drawing.Color.Transparent;
@@ -1190,6 +1141,58 @@
             this.btnEliminarPrestamo.Click += new System.EventHandler(this.btnEliminarPrestamo_Click);
             this.btnEliminarPrestamo.MouseEnter += new System.EventHandler(this.btnEliminarPrestamo_MouseEnter);
             this.btnEliminarPrestamo.MouseLeave += new System.EventHandler(this.btnEliminarPrestamo_MouseLeave);
+            // 
+            // btnEditarDireccion
+            // 
+            this.btnEditarDireccion.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditarDireccion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarDireccion.Image = global::SCreditos.Properties.Resources.editar;
+            this.btnEditarDireccion.Location = new System.Drawing.Point(523, 63);
+            this.btnEditarDireccion.Name = "btnEditarDireccion";
+            this.btnEditarDireccion.Size = new System.Drawing.Size(16, 16);
+            this.btnEditarDireccion.TabIndex = 37;
+            this.btnEditarDireccion.Click += new System.EventHandler(this.btnEditarDireccion_Click);
+            this.btnEditarDireccion.MouseEnter += new System.EventHandler(this.btnEditarDireccion_MouseEnter);
+            this.btnEditarDireccion.MouseLeave += new System.EventHandler(this.btnEditarDireccion_MouseLeave);
+            // 
+            // btnEditarTelefono
+            // 
+            this.btnEditarTelefono.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditarTelefono.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarTelefono.Image = global::SCreditos.Properties.Resources.editar;
+            this.btnEditarTelefono.Location = new System.Drawing.Point(523, 98);
+            this.btnEditarTelefono.Name = "btnEditarTelefono";
+            this.btnEditarTelefono.Size = new System.Drawing.Size(16, 16);
+            this.btnEditarTelefono.TabIndex = 36;
+            this.btnEditarTelefono.Click += new System.EventHandler(this.btnEditarTelefono_Click);
+            this.btnEditarTelefono.MouseEnter += new System.EventHandler(this.btnEditarTelefono_MouseEnter);
+            this.btnEditarTelefono.MouseLeave += new System.EventHandler(this.btnEditarTelefono_MouseLeave);
+            // 
+            // btnEditarNombre
+            // 
+            this.btnEditarNombre.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditarNombre.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarNombre.Image = global::SCreditos.Properties.Resources.editar;
+            this.btnEditarNombre.Location = new System.Drawing.Point(258, 63);
+            this.btnEditarNombre.Name = "btnEditarNombre";
+            this.btnEditarNombre.Size = new System.Drawing.Size(16, 16);
+            this.btnEditarNombre.TabIndex = 35;
+            this.btnEditarNombre.Click += new System.EventHandler(this.btnEditarNombre_Click);
+            this.btnEditarNombre.MouseEnter += new System.EventHandler(this.btnEditarNombre_MouseEnter);
+            this.btnEditarNombre.MouseLeave += new System.EventHandler(this.btnEditarNombre_MouseLeave);
+            // 
+            // btnEditarCedula
+            // 
+            this.btnEditarCedula.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditarCedula.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditarCedula.Image = global::SCreditos.Properties.Resources.editar;
+            this.btnEditarCedula.Location = new System.Drawing.Point(54, 63);
+            this.btnEditarCedula.Name = "btnEditarCedula";
+            this.btnEditarCedula.Size = new System.Drawing.Size(16, 16);
+            this.btnEditarCedula.TabIndex = 30;
+            this.btnEditarCedula.Click += new System.EventHandler(this.btnEditarCedula_Click);
+            this.btnEditarCedula.MouseEnter += new System.EventHandler(this.btnEditarCedula_MouseEnter);
+            this.btnEditarCedula.MouseLeave += new System.EventHandler(this.btnEditarCedula_MouseLeave);
             // 
             // Principal
             // 

@@ -1168,22 +1168,32 @@ namespace SCreditos.views
                 }
                 else
                 {
-                    List<Object> list = new List<Object>();
-                    contabilidads.ForEach(co =>
-                    {
-                        list.Add(co as Object);
-                    });
+                    List<Object> list = contabilidads.ConvertAll(c => c as Object);
+                    //    new List<Object>();
+                    //contabilidads.ForEach(co =>
+                    //{
+                    //    list.Add(co as Object);
+                    //});
 
                     CargarCarteraView cargarCarteraView = new CargarCarteraView(cobroActual.getNombre(), list);
                     cargarCarteraView.ShowDialog();
 
                     if (cargarCarteraView.seGuardo())
                     {
-                        List<Contabilidad> contabilidadesAGuardar = new List<Contabilidad>();
-                        cargarCarteraView.getContabilidadesAGuardar().ForEach(co =>
-                        {
-                            contabilidadesAGuardar.Add(co as Contabilidad);
-                        });
+                        MessageBox.Show("Se guardo exitosamente la cartera.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        cobroActual = cargarCarteraView.getCobro() as Cobro;
+
+                        listaCobros[listaCobros.FindIndex(c => c.getId() == cobroActual.getId())] = cobroActual;
+
+                        clienteActual = cobroActual.getClientes().Find(cli => cli.getCedula().Equals(clienteActual.getCedula()));
+                        prestamoActual = clienteActual.getPrestamos()[0];
+
+                        cargarPanelCliente(clienteActual, prestamoActual, clienteActual.getPrestamos(), true);
+                        cargarPanelDescripcion(prestamoActual);
+                        cargarPanelCalificacion(clienteActual, cobroActual.getClientes().Count, prestamoActual);
+                        cargarPanelPrestamo(prestamoActual);
+                        cargarPanelTablas(cobroActual);
                     }
                 }
             }
@@ -1746,6 +1756,8 @@ namespace SCreditos.views
 
         private void btnTirilla_Click(object sender, EventArgs e)
         {
+            //List<Contabilidad> c = CargarContabilidadesUseCase.corregirErrorContabilidades(cobroActual);
+
             cargarTirillaDeCartera();
         }
 
@@ -1776,7 +1788,7 @@ namespace SCreditos.views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //calcularCartera();
+            calcularCartera();
         }
 
         private void btnAgregarOtroGastoContabilidad_MouseEnter(object sender, EventArgs e)

@@ -28,7 +28,7 @@ namespace SCreditos.repos.repoprestamo
 
         public static String create_new_prestamo(Cobro cobro, Prestamo prestamo)
         {
-            return "SELECT CREAR_NUEVO_PRESTAMO('" + prestamo.getCedulaCliente() + "', " + prestamo.getPrestamo() + ", " + prestamo.getValor() + ", " + prestamo.getInteres() + ", " + prestamo.getPlazo() + ", '" + prestamo.getFechaInicio().ToShortDateString() + "', '" + cobro.getNombre() + "');";
+            return "SELECT CREAR_NUEVO_PRESTAMO('" + prestamo.getCedulaCliente() + "', " + prestamo.getPrestamo() + ", " + prestamo.getValor() + ", " + prestamo.getInteres() + ", " + prestamo.getPlazo() + ", '" + prestamo.getFechaInicio().ToShortDateString() + "', '" + cobro.getNombre() + "', " + prestamo.getDomingo().getValorPago() + ");";
         }
         
         public static String select_one_prestamo_last_by_cedula_cliente(String pCedula)

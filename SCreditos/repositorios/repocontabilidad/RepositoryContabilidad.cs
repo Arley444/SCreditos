@@ -207,5 +207,52 @@ namespace SCreditos.repos.repocontabilidad
 
             return null;
         }
+
+        public List<Contabilidad> cambiarEstadoContabilidades(List<Contabilidad> contabilidades, String pCobro)
+        {
+            try
+            {
+                contabilidades.ForEach(contabilidad =>
+                {
+                    Conexion.desconectar();
+                    command = new NpgsqlCommand(ScriptContabilidad.cambiar_estado_contabilidad(contabilidad), Conexion.conexion);
+                    Conexion.conectar();
+                    command.ExecuteReader();
+                });
+
+                return findAllByCobro(pCobro);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Cambiar Estado contabilidad.");
+            }
+
+            return null;
+        }
+
+        public List<Contabilidad> correccionErrorContabilidades(Cobro pCobro)
+        {
+            try
+            {
+                pCobro.getClientes().ForEach(cliente =>
+                {
+                    cliente.getPrestamos().ForEach(prestamo =>
+                    {
+                        Conexion.desconectar();
+                        command = new NpgsqlCommand(ScriptContabilidad.corregir_error_contabilidad(prestamo.getFechaInicio().ToShortDateString(), pCobro.getNombre(), prestamo.getDomingo().getValorPago()), Conexion.conexion);
+                        Conexion.conectar();
+                        command.ExecuteReader();
+                    });
+                });
+
+                return findAllByCobro(pCobro.getNombre());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Consulta: Corregir error contabilidad.");
+            }
+
+            return null;
+        }
     }
 }

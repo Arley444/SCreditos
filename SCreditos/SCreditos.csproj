@@ -321,6 +321,7 @@
     <Compile Include="usecase\contabilidad\CargarContabilidadesUseCase.cs" />
     <Compile Include="usecase\contabilidad\ConsultarContabilidadesFechaCobro.cs" />
     <Compile Include="usecase\contabilidad\ExisteContabilidadEnLaFecha.cs" />
+    <Compile Include="usecase\contabilidad\GuardarContabilidadesUseCase.cs" />
     <Compile Include="usecase\contabilidad\RestarAbonosDeContabilidadesUseCase.cs" />
     <Compile Include="usecase\contabilidad\RestarCobroUtilidadContabilidadUseCase.cs" />
     <Compile Include="usecase\domingo\EliminarDomingoUseCase.cs" />
@@ -372,6 +373,12 @@
     </Compile>
     <Compile Include="views\dialogs\CarteraTirilla.Designer.cs">
       <DependentUpon>CarteraTirilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\dialogs\ConfirmacionGuardarCarteraView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\dialogs\ConfirmacionGuardarCarteraView.Designer.cs">
+      <DependentUpon>ConfirmacionGuardarCarteraView.cs</DependentUpon>
     </Compile>
     <Compile Include="views\dialogs\CrearNuevoCobro.cs">
       <SubType>Form</SubType>
@@ -457,6 +464,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\CarteraTirilla.resx">
       <DependentUpon>CarteraTirilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dialogs\ConfirmacionGuardarCarteraView.resx">
+      <DependentUpon>ConfirmacionGuardarCarteraView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\dialogs\CrearNuevoCobro.resx">
       <DependentUpon>CrearNuevoCobro.cs</DependentUpon>

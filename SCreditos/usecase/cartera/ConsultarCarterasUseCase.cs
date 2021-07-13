@@ -14,5 +14,15 @@ namespace SCreditos.usecase.cartera
         {
             return new RepositoryCartera().findAll(pCobro);
         }
+
+        public static Cartera consultarUltimaCartera(String pCobro)
+        {
+            return new RepositoryCartera().obtenerUltimaCartera(pCobro);
+        }
+
+        public static Cobro guardarCartera(Cartera pCartera)
+        {
+            return new RepositoryCartera().guardarCartera(pCartera);
+        }
     }
 }

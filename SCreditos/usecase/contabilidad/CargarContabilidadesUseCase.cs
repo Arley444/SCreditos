@@ -11,5 +11,10 @@ namespace SCreditos.usecase.contabilidad
         {
             return new RepositoryContabilidad().findAllByCobro(cobro.getNombre());
         }
+
+        public static List<Contabilidad> corregirErrorContabilidades(Cobro cobro)
+        {
+            return new RepositoryContabilidad().correccionErrorContabilidades(cobro);
+        }
     }
 }

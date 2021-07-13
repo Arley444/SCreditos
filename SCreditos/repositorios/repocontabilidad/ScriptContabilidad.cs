@@ -1,4 +1,5 @@
 ﻿using SCreditos.models;
+using SCreditos.models.common;
 using System;
 
 namespace SCreditos.repos.repocontabilidad
@@ -63,7 +64,25 @@ namespace SCreditos.repos.repocontabilidad
 
         public static String restar_cobro_utilidad_a_contabilidad(Contabilidad contabilidad, Prestamo prestamo)
         {
-            script = "SELECT RESTAR_COBRO_UTILIDAD_Y_TARJETA_DE_CONTABILIDAD(" + contabilidad.getId() + ", " + prestamo.getPrestamo() + ", " + prestamo.getInteres() + ");";
+            script = "SELECT RESTAR_COBRO_UTILIDAD_Y_TARJETA_DE_CONTABILIDAD(" + contabilidad.getId() + ", " + prestamo.getPrestamo() + ", " + prestamo.getInteres() + ", " + prestamo.getDomingo().getValorPago() + ");";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String cambiar_estado_contabilidad(Contabilidad contabilidad)
+        {
+            script = "UPDATE CONTABILIDADES SET ESTADO = '" + TipoEstados.GUARDADO + "' WHERE ID = " + contabilidad.getId() + ";";
+
+            Console.WriteLine("SQL: " + script);
+
+            return script;
+        }
+
+        public static String corregir_error_contabilidad(String pFecha, String pCobro, Double pValorDomingo)
+        {
+            script = "UPDATE CONTABILIDADES SET COBRO = ((SELECT COBRO FROM CONTABILIDADES WHERE FECHA = '" + pFecha + "' AND NOMBRE_COBRO = '" + pCobro + "') + " + pValorDomingo + ") WHERE FECHA = '" + pFecha + "' AND NOMBRE_COBRO = '" + pCobro + "';";
 
             Console.WriteLine("SQL: " + script);
 

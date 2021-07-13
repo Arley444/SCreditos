@@ -28,8 +28,7 @@ namespace SCreditos.repos.repocliente
 
         public static String create_one_cliente_primero(String pDespuesDe, Cliente pCliente)
         {
-
-            script = "SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', 0, " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "');";
+            script = "SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', 0, " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "', " + pCliente.getPrestamos()[0].getDomingo().getValorPago() + ");";
 
             Console.WriteLine("SQL: " + script);
 
@@ -38,9 +37,7 @@ namespace SCreditos.repos.repocliente
 
         public static String create_one_cliente_despues(String pDespuesDe, int ruta, Cliente pCliente)
         {
-            Console.WriteLine("SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', " + ruta + ", " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "');");
-
-            script = "SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', "+ ruta +", " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "');";
+            script = "SELECT CREAR_CLIENTE('" + pCliente.getCedula() + "', '" + pCliente.getNombre() + "', '" + pCliente.getDireccion() + "', '" + pCliente.getCobro() + "', '" + pCliente.getTelefono() + "', '" + pDespuesDe + "', "+ ruta +", " + (long)pCliente.getPrestamos()[0].getPrestamo() + ", " + (long)pCliente.getPrestamos()[0].getValor() + ", " + (long)(pCliente.getPrestamos()[0].getValor() - pCliente.getPrestamos()[0].getPrestamo()) + ", " + pCliente.getPrestamos()[0].getPlazo() + ", '" + pCliente.getPrestamos()[0].getFechaInicio().ToShortDateString() + "', " + pCliente.getPrestamos()[0].getDomingo().getValorPago() + ");";
 
             Console.WriteLine("SQL: " + script);
 

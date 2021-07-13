@@ -200,3 +200,4 @@ D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.Elimina
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarTelefonoClienteView.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarDireccionClienteView.resources
 D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.EditarNombreClienteView.resources
+D:\PROYECTO_SANDRA\SCreditos\SCreditos\obj\Debug\SCreditos.views.dialogs.ConfirmacionGuardarCarteraView.resources

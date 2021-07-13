@@ -1,5 +1,7 @@
 ﻿using SCreditos.factory;
 using SCreditos.models;
+using SCreditos.usecase.cartera;
+using SCreditos.usecase.contabilidad;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +18,15 @@ namespace SCreditos.views.dialogs
     {
         private List<Contabilidad> contabilidades;
         private List<Object> contabilidadesAGuardar;
-        private Boolean gardado = false;
+        private Boolean guardado = false;
+        private String cobro;
+        private Cobro cobroActual;
 
 
         public CargarCarteraView(String pCobro, List<Object> pContabilidades)
         {            
-            contabilidades = new List<Contabilidad>();
+            this.contabilidades = new List<Contabilidad>();
+            this.cobro = pCobro;
             pContabilidades.ForEach(c =>
             {
                 contabilidades.Add(c as Contabilidad);
@@ -40,7 +45,7 @@ namespace SCreditos.views.dialogs
 
         public Boolean seGuardo()
         {
-            return this.gardado;
+            return this.guardado;
         }
 
         private void cargarContabilidades()
@@ -105,19 +110,48 @@ namespace SCreditos.views.dialogs
             }
         }
 
+        public Object getCobro()
+        {
+            return this.cobroActual;
+        }
+
         private void sacarContabilidadesAGuardar()
         {
-            if(MessageBox.Show("¿ Estas seguro ?", "CONFIRMACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                List<Contabilidad> con = contabilidades.FindAll(c => c.getFecha() >= DateTime.Parse(cboFechaInicial.Text) && c.getFecha() <= DateTime.Parse(cboFechaFinal.Text));
-                contabilidadesAGuardar = new List<Object>();
+            List<Contabilidad> con = contabilidades.FindAll(c => c.getFecha() >= DateTime.Parse(cboFechaInicial.Text) && c.getFecha() <= DateTime.Parse(cboFechaFinal.Text));
+            Cartera ultimaCartera = ConsultarCarterasUseCase.consultarUltimaCartera(this.cobro);
+            int tarjetas = ultimaCartera.getTarjetas() + con.Sum(c => c.getTarjetas());
+            Double cobro = con.Sum(c => c.getCobro());
+            Double presto = con.Sum(c => c.getPresto());
+            Double utilidad = con.Sum(c => c.getUtilidad());
+            Double valorBase = ultimaCartera.getCaja();
+            Double efectivo = cobro - presto + valorBase;
+            Double gastos = con.Sum(c => c.getGastos() + c.getOtrosGastos());
+            Double caja = efectivo;
+            Double cartera = ultimaCartera.getCartera() + (utilidad + valorBase) - (efectivo + gastos);
 
-                con.ForEach(co =>
-                {
-                    contabilidadesAGuardar.Add(co as Object);
-                });
+            Cartera carteraNueva = new Cartera();
+            carteraNueva.setNombreCobro(this.cobro);
+            carteraNueva.setFechaInicio(cboFechaInicial.Text);
+            carteraNueva.setFechaFinal(cboFechaFinal.Text);
+            carteraNueva.setTarjetas(tarjetas);
+            carteraNueva.setCobro(cobro);
+            carteraNueva.setPresto(presto);
+            carteraNueva.setUtilidad(utilidad);
+            carteraNueva.setBase(valorBase);
+            carteraNueva.setEfectivo(efectivo);
+            carteraNueva.setGastos(gastos);
+            carteraNueva.setCaja(caja);
+            carteraNueva.setCartera(cartera);
 
-                gardado = true;
+            ConfirmacionGuardarCarteraView confirmacionGuardarCarteraView = new ConfirmacionGuardarCarteraView(carteraNueva as Object);
+            confirmacionGuardarCarteraView.ShowDialog();
+
+            if (confirmacionGuardarCarteraView.getAprobo())
+            { 
+                List<Contabilidad> contabilidadesGuardadas = GuardarContabilidadesUseCase.guardarContabilidades(con, this.cobro);
+                this.cobroActual = ConsultarCarterasUseCase.guardarCartera(carteraNueva);
+
+                guardado = true;
                 this.Dispose();
             }
         }
